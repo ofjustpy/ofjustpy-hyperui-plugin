@@ -50,6 +50,8 @@ tag_to_passive_component = {
     'footer': PC.Footer
     
     }
+'img', 'legend', 'br', 'link', 'small', 'th', 'td', 'a', 'time'
+
 tag_to_passive_div = {
 
     'div': PC.Div,
