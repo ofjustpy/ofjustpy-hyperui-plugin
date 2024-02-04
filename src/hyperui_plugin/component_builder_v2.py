@@ -50,7 +50,7 @@ tag_to_passive_component = {
     'footer': PC.Footer
     
     }
-'img', 'legend', 'br', 'link', 'small', 'th', 'td', 'a', 'time'
+#'img', 'legend', 'br', 'link', 'small', 'th', 'td', 'a', 'time'
 
 tag_to_passive_div = {
 
@@ -340,7 +340,8 @@ def build_all_components(selection_filter=[]):
             # if not check_selection(child.name, component_selection):
             #     continue
             title, component_pyds = get_metadata(child.name)
-
+            print (title)
+            
             if title not in selection_filter:
                 continue
 

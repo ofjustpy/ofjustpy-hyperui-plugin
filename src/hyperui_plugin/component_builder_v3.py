@@ -10,7 +10,7 @@ import ofjustpy as oj
 from ofjustpy.SHC_types import PassiveComponents as PC
 from ofjustpy.htmlcomponents import ActiveComponents as AC
 from ofjustpy.htmlcomponents import ActiveDivs as AD
-from hyperui_plugin.SVGcomponents import PassiveComponents as SVGPassiveComponents
+from .SVGcomponents import PassiveComponents as SVGPassiveComponents
 from justpy.htmlcomponents import (svg_tags,
                                    svg_tags_use,
                                    svg_presentation_attributes,
@@ -20,36 +20,7 @@ from justpy.htmlcomponents import (svg_tags,
                                    )
 from py_tailwind_utils import  tstr
 from py_tailwind_utils.to_twsty_expr import encode_twstr
-
-
-tag_to_passive_component = {
-    'p': PC.P,
-    'strong': PC.Strong,
-    'h1': PC.H1,
-    'h2': PC.H2,
-    'h3': PC.H3,
-    'li': PC.Li,
-    'img': PC.Img,
-    'label': PC.Label,
-    'span': PC.Span,
-    'a': PC.A,
-    'dt': PC.Dt,
-    'dd': PC.Dd,
-    'div': PC.Div,
-    'legend': PC.Legend,
-    'option': PC.Option,
-    'small': PC.Small,
-    'th': PC.Th,
-    'td': PC.Td,
-    'br': PC.Br,
-    'time': PC.Time,
-    'address': PC.Address,
-    'script': PC.ScriptDiv,
-    'link': PC.A,
-    'blockquote': PC.BlockquoteDiv,
-    'footer': PC.Footer
-    
-    }
+from .icons import icon_db
 tag_to_passive_div = {
     'div': PC.Div,
     'span': PC.SpanDiv,
@@ -89,29 +60,19 @@ tag_to_passive_div = {
     'blockquote': PC.BlockquoteDiv
     }
 
-# has both text and childs
-tag_to_passive_component_div = {
-    'span': PC.SpanDiv,
-    'p': PC.PDiv
-    }
-
-tag_to_active_component = {
-    'input': AC.TextInput,
-    'button': AC.Button,
-    'textarea': AC.Textarea
-    }
-
 tag_to_active_div = {
     'button': AD.Button,
     'a': AD.A,
     'form': AD.Form,
-    'select': AD.Select
+    'select': AD.Select,
+    'input': AD.TextInput,
+    'textarea': AD.Textarea
     }
 
 active_id_ctr = 0
 oj.set_style('un')
 
-def is_valid_argstring(s):
+def is_valid_textarg(s):
     """
     Component arguments within the html file is specified as {{{ARG_<X>}}} where
     X is the identifier of the argument
@@ -119,16 +80,33 @@ def is_valid_argstring(s):
     pattern = r'^\{\{\{ARG_[a-zA-Z_]\w*\}\}\}$'
     if re.match(pattern, s) is not None:
         return True
+
+def is_valid_iconarg(s):
+    """
+    Component arguments within the html file is specified as {{{ARG_<X>}}} where
+    X is the identifier of the argument
+    """
     
     pattern = r'^\{\{\{ARG_[a-zA-Z_]\w*(=[^\}]+)?\}\}\}$'
     if re.match(pattern, s) is not None:
         return True
 
-def extract_argname(s):
+
+def extract_text_argname(s):
     pattern = r'^\{\{\{ARG_([a-zA-Z_]\w*)\}\}\}$'
     match = re.match(pattern, s)
     return match.group(1) if match else None
 
+def extract_icon_argname(input_string):
+    pattern = r'^\{\{\{ARG_([a-zA-Z_]\w*)(=([^\}]+))?\}\}\}$'
+    match = re.match(pattern, input_string)
+    
+    if match:
+        argname = match.group(1)
+        default_value = match.group(3) if match.group(3) else None
+        return argname, default_value
+    else:
+        return None, None
     
 def svg_arg_updater(the_comp):
     
@@ -136,8 +114,8 @@ def svg_arg_updater(the_comp):
 def text_arg_updater(the_comp, text,  updaters=None):
     if not updaters:
         updaters = {}
-    if is_valid_argstring(text):
-        arg_name = extract_argname(text)
+    if is_valid_textarg(text):
+        arg_name = extract_text_argname(text)
         assert arg_name is not None
         assert arg_name not in updaters
         updaters[arg_name] =  lambda new_text, K=the_comp: setattr(K, 'text', new_text)
@@ -146,6 +124,32 @@ def text_arg_updater(the_comp, text,  updaters=None):
     else:
         return (the_comp, updaters)
     pass
+
+def icon_arg_updater(the_comp, text,  updaters=None):
+    if not updaters:
+        updaters = {}
+
+    if is_valid_iconarg(text):
+        arg_name, default_icon_name = extract_icon_argname(text)
+        assert arg_name is not None
+        assert arg_name not in updaters
+        # 
+
+        assert default_icon_name in icon_db
+        default_icon = icon_db[default_icon_name]
+        the_comp.components.append(default_icon)
+        assert len(the_comp.components) == 1
+        def child_icon_updater(K=the_comp, icon=default_icon):
+            K.components[0] = icon
+        updaters[arg_name] =  lambda icon=default_icon: child_icon_updater(icon=icon)
+        return (the_comp, updaters
+                )
+    else:
+        return (the_comp, updaters)
+    pass
+
+
+
 
 import pysnooper
 #@pysnooper.snoop()
@@ -176,97 +180,43 @@ def visit(element):
     # if the text is {{{ARG_*}}} then use this as argument
     
     div_component_text =  None
-    num_children = len(element.getchildren())
-    if element.tag in svg_tags_use:
-        tag = element.tag
-        c_tag = tag[0].capitalize() + tag[1:]
-        component_generator = getattr(SVGPassiveComponents, c_tag)
-        f = lambda childs, twsty_tags=twsty_tags: component_generator(**element.attrib, childs=childs, twsty_tags=twsty_tags)
-
-    else:
-        if num_children == 0:
-            if element.tag in tag_to_passive_component:
-                component_generator = tag_to_passive_component[element.tag]
-                text = element.text
-
-                if text:
-
-                    K =  component_generator(**element.attrib, text=text, twsty_tags=twsty_tags)
-                    return text_arg_updater(K, text)
-
-                else:
-                    return (component_generator(**element.attrib, twsty_tags=twsty_tags), {})
-
-            elif element.tag in tag_to_active_component:
-                component_generator = tag_to_active_component[element.tag]
-                active_id_ctr += 1
-                if element.text:
-                    K = component_generator(key=str(active_id_ctr), **element.attrib, text=element.text, twsty_tags=twsty_tags)
-                    return text_arg_updater(K, text)
-                    
-                else:
-                    return (component_generator(key=str(active_id_ctr), **element.attrib), {})
-            else:
-                print(" not found ", element.tag, " num_children=", num_children)
-                assert False
-
+    kwargs = {}
+    arg_type = None
+    if element.text:
+        div_component_text = element.text.strip()
+        if is_valid_textarg(div_component_text):
+            arg_type="text"
+            pass
+        elif is_valid_iconarg(div_component_text):
+            arg_type="icon"
+            pass
         else:
-
-            if element.tag in tag_to_passive_component_div:
-                kwargs = {}
-                if element.text:
-                    kwargs['text'] = element.text.strip()
-                    div_component_text = kwargs['text'] 
-                    
-                component_generator = tag_to_passive_component_div[element.tag]
-                f = lambda childs, twsty_tags=twsty_tags,  kwargs=kwargs: component_generator(**element.attrib, **kwargs, childs=childs, twsty_tags=twsty_tags)
-
-            elif element.tag in tag_to_passive_div:
-                kwargs = {}
-                if element.text:
-                    kwargs['text'] = element.text.strip()
-                    div_component_text = kwargs['text'] 
-                component_generator = tag_to_passive_div[element.tag]
-                f = lambda childs, twsty_tags=twsty_tags, kwargs=kwargs: component_generator(**element.attrib, childs=childs, twsty_tags=twsty_tags, **kwargs)
-            elif element.tag == "spansvg":
-                kwargs = {}
-                component_generator = tag_to_passive_div['span']
-                f = lambda childs, twsty_tags=twsty_tags, kwargs=kwargs: component_generator(**element.attrib, childs=childs, twsty_tags=twsty_tags, **kwargs)
-
-            elif element.tag in tag_to_active_div:
-                kwargs = {}
-                if element.text.strip():
-                    kwargs['text'] = element.text.strip()
-                    div_component_text = kwargs['text'] 
-                component_generator = tag_to_active_div[element.tag]
-                f = lambda childs, twsty_tags=twsty_tags, key=str(active_id_ctr), kwargs=kwargs: component_generator(key=key, **element.attrib, childs = childs, twsty_tags=twsty_tags, **kwargs)
-                active_id_ctr += 1
-
-
-
-                
-            else:
-                print(" not found ", element.tag, " num_children=", num_children)
-                assert False
+            kwargs['text'] = div_component_text
 
     child_updater_pairs = [visit(_) for _ in element]
-    #print ("exit ", element.tag, " with attribute: ", element.attrib)
     updaters = {}
     childs = []
     for child, child_updater in child_updater_pairs:
-        # 
         updaters.update(child_updater)
         childs.append(child)
-
-    K = f(childs=childs)
-    if arg_svg_span:
-        return (the_comp, updaters
-                )
-        pass
-    
-    if div_component_text:
+    if element.tag in tag_to_passive_div:
+        component_generator = tag_to_passive_div[element.tag]
+        K = component_generator(**element.attrib, **kwargs, childs=childs, twsty_tags=twsty_tags)
+    elif element.tag in tag_to_active_div:
+        component_generator = tag_to_active_div[element.tag]
+        key=str(active_id_ctr)
+        K = component_generator(key=key,
+                                **element.attrib,
+                                childs = childs,
+                                twsty_tags=twsty_tags,
+                                **kwargs)
+        active_id_ctr += 1
+    if arg_type=="text":
         return text_arg_updater(K, div_component_text, updaters)
-    return  (K, updaters)
+    elif arg_type == "icon":
+        return icon_arg_updater(K, div_component_text, updaters)
+    else:
+        return  (K, updaters)
 def build_component(html_content):
     """
     from hyperui html+tailwind css description -- derive an ofjustpy component 
