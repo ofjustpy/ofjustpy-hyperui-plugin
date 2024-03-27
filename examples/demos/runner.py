@@ -14,7 +14,7 @@ import macropy.activate
 # import demo_item_13_pagination
 #import demo_item_15_radiogroups #not working
 #import demo_item_16_selects
-# import demo_item_17_sideMenu
+import demo_item_17_sideMenu
 #import demo_item_18_stats
 #import demo_item_19_steps
 #import demo_item_20_tables
@@ -45,15 +45,7 @@ import macropy.activate
 #import demo_item_46_testimonials
 
 
-#import demo_item_25_banners
-# import demo_item_26_blog_cards
-#import demo_item_27_marketing_cards
-#import demo_item_28_popups
-#import demo_item_29_pricings
-#import td_macro_module
-#import td_html_writer_icons
-#import td_event_handler
-#import td_mutable_ui
+
 import ofjustpy as oj
 
 app = oj.load_app()

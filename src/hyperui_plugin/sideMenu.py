@@ -3,33 +3,38 @@ from ofjustpy import icons
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import conc_twtags, tstr, pd, grow, bg, green, W, fc, gray
 from html_writer.macro_module import macros, writer_ctx
-def Simple(logo=None, **kwargs):
+
+
+
+def Simple(logo=None, twsty_tags=[], **kwargs):
+
     with writer_ctx:
-        with Div(classes="flex h-screen flex-col justify-between border-e bg-white") as comp_box:
-            with Div(classes="px-4 py-6"):
-                with Span(classes="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600", text=logo):
+        with Div(classes=f"flex h-screen flex-col justify-between border-e bg-white {tstr(*twsty_tags)}") as comp_box:
+            with Div(classes=" flex justify-center"):
+                with Span(classes="px-2 py-6 font-bold text-indigo-700 text-large uppercase leading-normal", text=logo):
                     pass
 
-            with Ul(classes="mt-6 space-y-1") as menu_box:
+            with Ul(classes="mt-6 flex-1") as menu_box:
                 pass
             
-        
-        
     def add_flat_item(key, label,  menu_box=menu_box, **kwargs):
         with writer_ctx:
-            with Li() as item_box:
-                with Button(key=key, classes= "block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700", text=label, **kwargs):
+            with Li(classes="justify-center px-4 py-2") as item_box:
+                with Button(key=key, classes= "rounded-lg border border-2 border-indigo-500/50 px-4 py-1 text-sm font-medium text-indigo-500 uppercase leading-normal hover:bg-gradient-to-bl hover:from-gray-200 hover:to-gray-200 hover:via-gray-100/5 w-52 overflow-x-auto shadow shadow-indigo-200  hover:shadow-md hower:shadow-indigo-300", text=label, **kwargs):
                     pass
 
         menu_box.components.append(item_box)
         
     def add_group_item(title, menu_box=menu_box):
         with writer_ctx:
-            with Li() as group_box:
+            with Li(classes='') as group_box:
                 with Details(classes='group', extra_classes="[&_summary::-webkit-details-marker]:hidden"):
                     with Summary(classes='flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700'):
-                        with Span(classes='text-sm font-medium', text=title):
+                        with Div(classes = "flex-1 flex justify-center"):
+                            with Span(classes='px-4 font-bold text-indigo-500 text-large uppercase leading-normal', text=title):
+                                pass
                             pass
+                        
 
                         with Span(classes='shrink-0 transition duration-300 group-open:-rotate-180'):
                             with Icon_Chevrondown():
@@ -37,13 +42,13 @@ def Simple(logo=None, **kwargs):
 
                         
 
-                    with Ul(classes='mt-2 space-y-1 px-4') as ul_box:
+                    with Ul(classes='mt-3 flex-1 space-y-3') as ul_box:
                         pass
 
-        def add_flat_item(key, label, ul_box=ul_box):
+        def add_flat_item(key, label, ul_box=ul_box, **kwargs):
             with writer_ctx:
-                with Li() as li_box:
-                    with Button(key=key, classes='block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700', text=label):
+                with Li(classes="justify-center px-4") as li_box:
+                    with Button(key=key, classes='rounded-lg border border-2 border-indigo-500/50 px-4 py-1 text-sm font-medium text-indigo-500 uppercase leading-normal hover:bg-gradient-to-bl hover:from-gray-200 hover:to-gray-200 hover:via-gray-100/5 w-52 overflow-x-auto shadow shadow-indigo-200  hover:shadow-md hower:shadow-indigo-300', text=label, **kwargs):
                                 pass
 
             ul_box.components.append(li_box)
