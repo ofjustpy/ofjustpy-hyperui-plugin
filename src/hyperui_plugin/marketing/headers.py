@@ -26,7 +26,7 @@ def LeftAligned():
                 with A(classes='block text-teal-600', href='/'):
                     with Span(classes='sr-only', text="Home"):
                         pass
-                    with Icon_Squid():
+                    with FontAwesomeIcon(label="faHippo"):
                         pass
                     
                 with Div(classes='flex flex-1 items-center justify-end md:justify-between'):
@@ -63,7 +63,7 @@ def LeftAligned():
                         # Mobile Menu Toggle Button
                         with Button(key="btn", classes='block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden'):
                             with Span(classes='sr-only', text="Toggle menu"):
-                                with Icon_Menu():
+                                with FontAwesomeIcon(label="faBars"):
                                     pass
 
 

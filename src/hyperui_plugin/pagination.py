@@ -1,5 +1,5 @@
 import ofjustpy as oj
-from ofjustpy import icons
+from ofjustpy.icons import FontAwesomeIcon
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import conc_twtags, tstr, pd, grow
 
@@ -12,7 +12,7 @@ def WithButtons(key, page_numbers, href_begin="#", href_end="#"):
                 with A(key=f"begin_{key}", href=href_begin, classes='inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180'):
                     with Span(classes='sr-only', text='Prev Page'):
                         pass
-                    with Icon_PaginationLeft():
+                    with FontAwesomeIcon(label="faChevronLeft"):
                         pass
                     
 
@@ -30,7 +30,7 @@ def WithButtons(key, page_numbers, href_begin="#", href_end="#"):
             with A(key=f"last_{key}", classes="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180", href=href_end):
                 with Span(classes="sr-only", text="Next Page"):
                     pass
-                with Icon_PaginationRight():
+                with FontAwesomeIcon(label="faChevronRight"):
                     pass
     comp_box.components.append(li_item)
 
@@ -44,7 +44,7 @@ def WithInput(key):
             with A(href='#', classes='inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180', key=f"pno_prev_{key}"):
                 with Span(classes='sr-only', text='Prev Page'):
                     pass
-                with Icon_PaginationLeft():
+                with FontAwesomeIcon(label="faChevronLeft"):
                     pass
 
             with Div():
@@ -59,7 +59,7 @@ def WithInput(key):
             with A(href='#', classes='inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180', key=f"pno_next_{key}"):
                 with Span(classes='sr-only', text='Next Page'):
                     pass
-                with Icon_PaginationRight():
+                with FontAwesomeIcon(label="faChevronRight"):
                     pass
 
     return comp_box
@@ -73,7 +73,7 @@ def BackgroundWithInput(key):
                 with Span(classes='sr-only', text='Prev Page'):
                     pass
 
-                with Icon_PaginationLeft():
+                with FontAwesomeIcon(label="faChevronLeft"):
                     pass
                 
             with Span(classes='h-4 w-px bg-white/25'):
@@ -93,7 +93,7 @@ def BackgroundWithInput(key):
                 with Span(classes='sr-only', text='Next Page'):
                     pass
                 
-                with Icon_PaginationRight():
+                with FontAwesomeIcon(label="faChevronRight"):
                     pass
 
     return comp_box
@@ -105,7 +105,7 @@ def WithFraction(key):
                 with Span(classes='sr-only', text='Next Page'):
                     pass
 
-                with Icon_PaginationLeft():
+                with FontAwesomeIcon(label="faChevronLeft"):
                     pass
                 
             with P(classes='text-xs text-gray-900', text='3'):
@@ -116,7 +116,7 @@ def WithFraction(key):
             with A(href='#', classes='inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180'):
                 with Span(classes='sr-only', text='Next Page'):
                     pass
-                with Icon_PaginationRight():
+                with FontAwesomeIcon(label="faChevronRight"):
                     pass
 
     return comp_box

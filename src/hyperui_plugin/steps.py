@@ -1,4 +1,5 @@
 import ofjustpy as oj
+from ofjustpy.icons import FontAwesomeIcon
 from html_writer.macro_module import macros, writer_ctx
 # TODO: make this mutable with next button
 from py_tailwind_utils import W, full
@@ -23,14 +24,14 @@ def WithTextAndIcon(key):
                         with Span(classes='hidden sm:inline', text='Details'):
                             pass
 
-                        with Icon_IdCard():
+                        with FontAwesomeIcon(label="faIdCard"):
                             pass
 
                     with Li(classes='flex items-center justify-center text-blue-600 sm:gap-1.5'):
                         with Span(classes='hidden sm:inline', text='Address'):
                             pass
 
-                        with Icon_AddressPin():
+                        with  FontAwesomeIcon(label="faLocationPin"):
                             pass
 
 
@@ -38,7 +39,7 @@ def WithTextAndIcon(key):
                         with Span(classes='hidden sm:inline', text='Payment'):
                             pass
 
-                        with Icon_PaymentCard():
+                        with FontAwesomeIcon(label="faCreditCard"):
                             pass
 
     cur_pos = 2
@@ -107,8 +108,10 @@ def WithCheckIcons(key):
             with Div(classes='after:mt-4 after:block after:h-1 after:w-full after:rounded-lg after:bg-gray-200'):
                 with Ol(classes='grid grid-cols-3 text-sm space-x-8 font-medium text-gray-500'):
                     with Li(classes='relative flex justify-start text-blue-600'):
-                        with Span(classes='absolute -bottom-[1.75rem] start-0 rounded-full bg-blue-600 text-white'):
-                            with Icon_EncircledCheckmark():
+                        with Span(classes='absolute start-0 rounded-full bg-blue-600 text-white',
+                                  extra_classes="-bottom-[1.75rem]"
+                                  ):
+                            with FontAwesomeIcon(label="faCircleCheck"):
                                 pass
 
                         with Span(classes='hidden sm:block', text='Details'):
@@ -118,8 +121,10 @@ def WithCheckIcons(key):
                         #     pass
 
                     with Li(classes='relative flex justify-center text-blue-600'):
-                        with Span(classes='absolute -bottom-[1.75rem] left-1/2 -translate-x-1/2 rounded-full bg-blue-600 text-white'):
-                            with Icon_EncircledCheckmark():
+                        with Span(classes='absolute left-1/2 -translate-x-1/2 rounded-full bg-blue-600 text-white',
+                                  extra_classes="-bottom-[1.75rem]"
+                                  ):
+                            with FontAwesomeIcon(label="faCircleCheck"):
                                 pass
 
                         with Span(classes='hidden sm:block', text='Address'):
@@ -131,8 +136,10 @@ def WithCheckIcons(key):
 
 
                     with Li(classes='relative flex justify-end'):
-                        with Span(classes='absolute -bottom-[1.75rem] end-0 rounded-full bg-gray-600 text-white'):
-                            with Icon_EncircledCheckmark():
+                        with Span(classes='absolute end-0 rounded-full bg-gray-600 text-white',
+                                  extra_classes="-bottom-[1.75rem]"
+                                  ):
+                            with FontAwesomeIcon(label="faCircleCheck"):
                                 pass
                             
 
@@ -152,7 +159,7 @@ def WithChevronTextIcon():
             with Div():
                 with Ol(classes='grid grid-cols-1 divide-x divide-gray-100 overflow-hidden rounded-lg border border-gray-100 text-sm text-gray-500 sm:grid-cols-3'):
                     with Li(classes='flex items-center justify-center gap-2 p-4'):
-                        with Icon_IdCard():
+                        with FontAwesomeIcon(label="faIdCard"):
                             pass
 
                         with P(classes='leading-none'):
@@ -169,7 +176,7 @@ def WithChevronTextIcon():
                         with Span(classes='absolute -right-2 top-1/2 hidden h-4 w-4 -translate-y-1/2 rotate-45 border border-gray-100 ltr:border-b-0 ltr:border-s-0 ltr:bg-gray-50 rtl:border-e-0 rtl:border-t-0 rtl:bg-white sm:block'):
                             pass
 
-                        with Icon_AddressPin():
+                        with FontAwesomeIcon(label="faLocationPin"):
                                 pass
 
                         with P(classes='leading-none'):
@@ -180,7 +187,7 @@ def WithChevronTextIcon():
                                 pass
 
                     with Li(classes='flex items-center justify-center gap-2 p-4'):
-                        with Icon_PaymentCard():
+                        with FontAwesomeIcon(label="faCreditCard"):
                             pass
 
                         with P(classes='leading-none'):

@@ -45,7 +45,7 @@ def BottomWithClose():
                         
 
                 with Button(key="close", classes='shrink-0 rounded-lg bg-black/10 p-1 transition hover:bg-black/20', aria_label='Close'):
-                    with Icon_Cross():
+                    with FontAwesomeIcon(label="faXmark", classes="w-5 h-5",):
                         pass
 
 

@@ -100,7 +100,7 @@ def CenteredWithBranding():
         with Footer(classes='bg-gray-100') as comp_box:
             with Div(classes='mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8'):
                 with Div(classes='flex justify-center text-teal-600'):
-                    with Icon_Squid():
+                    with FontAwesomeIcon(label="faHippo"):
                         pass
                     pass
 
@@ -143,25 +143,29 @@ def CenteredWithBranding():
                     with Li():
                         with A(href='/', rel='noreferrer', target='_blank', classes='text-gray-700 transition hover:text-gray-700/75'):
                             with Span(classes='sr-only'):
-                                with Icon_Facebook():
+                                with FontAwesomeIcon(label="faFacebook",
+                                                     fa_group="brands"):
                                     pass
 
                     with Li():
                         with A(href='/', rel='noreferrer', target='_blank', classes='text-gray-700 transition hover:text-gray-700/75'):
                             with Span(classes='sr-only'):
-                                with Icon_Instagram():
+                                with FontAwesomeIcon(label="faInstagram",
+                                                     fa_group="brands"):
                                     pass
 
                     with Li():
                         with A(href='/', rel='noreferrer', target='_blank', classes='text-gray-700 transition hover:text-gray-700/75'):
                             with Span(classes='sr-only'):
-                                with Icon_Twitter():
+                                with FontAwesomeIcon(label="faTwitter",
+                                                     fa_group="brands"):
                                     pass
 
                     with Li():
                         with A(href='/', rel='noreferrer', target='_blank', classes='text-gray-700 transition hover:text-gray-700/75'):
                             with Span(classes='sr-only'):
-                                with Icon_GitHub():
+                                with FontAwesomeIcon(label="faGithub",
+                                                     fa_group="brands"):
                                     pass
                                 
                                 

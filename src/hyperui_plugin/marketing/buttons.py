@@ -38,7 +38,10 @@ def Simple_Blank(key, label, href="#", **kwargs, ):
 
 def GradientBorder(key, label, href="#", **kwargs, ):
     with writer_ctx:
-        with A(classes='group inline-block rounded bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:text-white focus:outline-none focus:ring active:text-opacity-75',  extra_classes="p-[2px]", href=href,  **kwargs) as comp_box:
+        with A(classes='group inline-block rounded bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:text-white focus:outline-none focus:ring active:text-opacity-75',
+               extra_classes="p-[2px]",
+               href=href,
+               **kwargs) as comp_box:
             with Span(classes="block rounded-sm bg-white px-8 py-3 text-sm font-medium group-hover:bg-transparent", text=label):
                 pass
             pass
@@ -47,7 +50,10 @@ def GradientBorder(key, label, href="#", **kwargs, ):
 
 def GradientBorder_Oval(key, label, href="#", **kwargs):
     with writer_ctx:
-        with A(classes='group inline-block rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:text-white focus:outline-none focus:ring active:text-opacity-75',  extra_classes="p-[2px]", href=href,  **kwargs) as comp_box:
+        with A(classes='group inline-block rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 hover:text-white focus:outline-none focus:ring active:text-opacity-75',
+               extra_classes="p-[2px]",
+               href=href,
+               **kwargs) as comp_box:
             with Span(classes="block rounded-sm bg-white px-8 py-3 text-sm font-medium group-hover:bg-transparent", text=label):
                 pass
             pass
@@ -71,10 +77,13 @@ def CurtainClose(key, label, xdir="left", href="#", **kwargs):
         
     with writer_ctx:
         with A(classes='group relative inline-block overflow-hidden border border-indigo-600 px-8 py-3 focus:outline-none focus:ring', href=href, **kwargs) as comp_box:
-            with Span(classes=f'absolute {tw} bg-indigo-600 transition-all group-hover:w-full group-active:bg-indigo-500'):
+            with Span(classes=f'absolute bg-indigo-600 transition-all group-hover:w-full group-active:bg-indigo-500',
+                      extra=tw
+                      ):
                 pass
 
-            with Span(classes='relative text-sm font-medium text-indigo-600 transition-colors group-hover:text-white', text=label):
+            with Span(classes='relative text-sm font-medium text-indigo-600 transition-colors group-hover:text-white',
+                      text=label):
                 pass
 
     return comp_box

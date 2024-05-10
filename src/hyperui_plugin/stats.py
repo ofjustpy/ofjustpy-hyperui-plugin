@@ -1,4 +1,5 @@
 import ofjustpy as oj
+from ofjustpy.icons import FontAwesomeIcon
 from html_writer.macro_module import macros, writer_ctx
 
 #TODO: make it a proper plugabble component: remove hardwiring of values.
@@ -8,7 +9,7 @@ def Simple():
         with Article(classes="flex flex-col gap-4 rounded-lg border border-gray-100 bg-white p-6") as comp_1:
 
             with Div(classes='inline-flex gap-2 self-end rounded bg-green-100 p-1 text-green-600') :
-                with Icon_ChartUp():
+                with FontAwesomeIcon(label="faChartLine"):
                     pass
 
                 with Span(classes='text-xs font-medium', text='67.81%'):
@@ -28,7 +29,7 @@ def Simple():
     with writer_ctx:
         with Article(classes="flex flex-col gap-4 rounded-lg border border-gray-100 bg-white p-6") as comp_2:
             with Div(classes='inline-flex gap-2 self-end rounded bg-red-100 p-1 text-red-600'):
-                with Icon_ChartDown():
+                with FontAwesomeIcon(label="faCircleQuestion"):
                     pass
 
                 with Span(classes='text-xs font-medium', text='67.81%'):
@@ -53,7 +54,7 @@ def IconStat():
         with Article(classes='flex items-end justify-between rounded-lg border border-gray-100 bg-white p-6') as comp_1:
             with Div(classes='flex items-center gap-4'):
                 with Span(classes='hidden rounded-full bg-gray-100 p-2 text-gray-600 sm:block'):
-                    with Icon_PaperMoney():
+                    with FontAwesomeIcon(label="faMoneyBill"):
                         pass
 
                 with Div():
@@ -65,7 +66,7 @@ def IconStat():
                             pass
 
             with Div(classes='inline-flex gap-2 rounded bg-green-100 p-1 text-green-600'):
-                with Icon_ChartUp():
+                with FontAwesomeIcon(label="faCircleQuestion"):
                     pass
 
                 with Span(classes='text-xs font-medium', text='67.81%'):
@@ -75,7 +76,7 @@ def IconStat():
         with Article(classes='flex items-end justify-between rounded-lg border border-gray-100 bg-white p-6') as comp_2:
             with Div(classes='flex items-center gap-4'):
                 with Span(classes='hidden rounded-full bg-gray-100 p-2 text-gray-600 sm:block'):
-                    with Icon_PaperMoney():
+                    with FontAwesomeIcon(label="faMoneyBill"):
                         pass
 
                 with Div():
@@ -87,7 +88,7 @@ def IconStat():
                             pass
 
             with Div(classes='inline-flex gap-2 rounded bg-red-100 p-1 text-red-600'):
-                with Icon_ChartDown():
+                with FontAwesomeIcon(label="faCircleQuestion"):
                     pass
                 with Span(classes='text-xs font-medium', text='67.81%'):
                     pass
@@ -105,7 +106,7 @@ def SimpleWithStat():
                         pass
 
             with Div(classes='inline-flex gap-2 rounded bg-green-100 p-1 text-green-600'):
-                with Icon_ChartUp():
+                with FontAwesomeIcon(label="faCircleQuestion"):
                     pass
 
                 with Span(classes='text-xs font-medium', text='67.81%'):
@@ -122,7 +123,7 @@ def SimpleWithStat():
                         pass
 
             with Div(classes='inline-flex gap-2 rounded bg-red-100 p-1 text-red-600'):
-                with Icon_ChartDown():
+                with FontAwesomeIcon(label="faCircleQuestion"):
                     pass
 
                 with Span(classes='text-xs font-medium', text='67.81%'):

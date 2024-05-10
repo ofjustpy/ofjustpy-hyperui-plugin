@@ -61,7 +61,7 @@ def MessageNotificationsAndAction(message_title,
         with Div(classes="rounded-2xl border border-blue-100 bg-white p-4 shadow-lg sm:p-6 lg:p-8", role="alert") as comp_box:
             with Div(classes="flex items-center gap-4"):
                 with Span(classes="shrink-0 rounded-full bg-blue-400 p-2 text-white"):
-                    with Icon_ShoutOut():
+                    with FontAwesomeIcon(label="faBullhorn"):
                         pass
 
                 with P(classes="font-medium sm:text-lg", text=message_title):
@@ -121,21 +121,24 @@ def ContactActions():
                 with A(classes="rounded-full border border-gray-200 p-2 text-gray-900", href="#"):
                     with Span(classes="sr-only", text="Company Facebook"):
                         pass
-                    with Icon_Facebook():
+                    with FontAwesomeIcon(label="faFacebook",
+                                         fa_group="brands"):
                         pass
                         # Path element and its attributes go here
 
                 with A(classes="rounded-full border border-gray-200 p-2 text-gray-900", href="#"):
                     with Span(classes="sr-only", text="Company Instagram"):
                         pass
-                    with Icon_Instagram():
+                    with FontAwesomeIcon(label="faInstagram",
+                                         fa_group="brands"):
                         pass
                         # Path element and its attributes go here
 
                 with A(classes="rounded-full border border-gray-200 p-2 text-gray-900", href="#"):
                     with Span(classes="sr-only", text="Company Twitter"):
                         pass
-                    with Icon_Twitter():
+                    with FontAwesomeIcon(label="faTwitter",
+                                         fa_group="brands"):
                         pass
                         # Path element and its attributes go here
 
@@ -148,7 +151,7 @@ def NotificationWithImageAndClose(key):
             with Button(key=key, classes="absolute -end-1 -top-1 rounded-full border border-gray-300 bg-gray-100 p-1"):
                 with Span(classes="sr-only", text="Close"):
                     pass
-                with Icon_Cross():
+                with FontAwesomeIcon(label="faXmark"):
                     pass
 
             with Div(classes="flex items-center gap-4 p-4"):
@@ -170,7 +173,7 @@ def FloatingSplitWithImageContentClose(key):
         with Div(classes="fixed inset-x-0 bottom-0 p-4") as comp_box:
             with Div(classes="relative max-w-xl rounded-lg bg-gray-100 p-6 shadow-sm"):
                 with Button(key=key, classes="absolute -end-1 -top-1 rounded-full border border-gray-200 bg-white p-1 text-gray-400"):
-                    with Icon_Cross():
+                    with FontAwesomeIcon(label="faXmark"):
                         pass
 
                 with Div(classes="grid grid-cols-1 gap-4 sm:grid-cols-2"):
@@ -197,7 +200,7 @@ def FloatingWithClose(key):
                 pass
 
             with Button(key = key, classes="rounded bg-white/20 p-1 hover:bg-white/10"):
-                with Icon_Cross():
+                with FontAwesomeIcon(label="faXmark"):
                     pass
 
     return comp_box

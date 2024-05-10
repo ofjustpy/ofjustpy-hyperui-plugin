@@ -7,9 +7,10 @@ from py_tailwind_utils import conc_twtags, tstr, pd, grow
 def card(title, text, img_src, img_alt="", align = "top"):
     img = oj.PC.Img(src = img_src, alt=img_alt, twsty_tags=encode_twstr("aspect-square w-20 rounded-lg object-cover")
               )
-
     title = oj.PC.H3(text=title, twsty_tags=encode_twstr("text-lg/tight font-medium text-gray-900"))
-    content = oj.PC.P(twsty_tags=encode_twstr("mt-0.5 text-gray-700"), text=text)
+    twsty_tags = encode_twstr("mt-0.5  w-64 border-pink-500")
+    content = oj.PC.P( text=text, twsty_tags=twsty_tags)
+
     match align:
         case "top":
             align_tw = "items-start"
@@ -28,7 +29,9 @@ def card(title, text, img_src, img_alt="", align = "top"):
         case "stretch-right":
             align_tw = "flex-row-reverse items-stretch"
             
-            
-    root = oj.PC.Div(childs = [img, oj.PC.Div(childs=[title, content])], twsty_tags=encode_twstr(f"flex {align_tw} gap-4"))
+
+    # TODO: bug bug bug in encode
+    #twsty_tags=encode_twstr(f"flex {align_tw} gap-4")
+    root = oj.PC.Div(childs = [img, oj.PC.Div(childs=[title, content])], classes=f"flex {align_tw} gap-4")
     return root
 

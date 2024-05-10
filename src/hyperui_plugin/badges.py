@@ -11,7 +11,7 @@ def Badge(label=None, icon=None):
             pass
 
     if icon:
-        badge_box.components.append(icon())
+        badge_box.components.append(icon)
 
     if label:
         with writer_ctx:
@@ -25,7 +25,7 @@ def Badge(label=None, icon=None):
             with Button(key=key, classes='-me-1 ms-1.5 inline-block rounded-full bg-purple-200 p-0.5 text-purple-700 transition hover:bg-purple-300', **btn_kwargs) as remove_button:
                 with Span(classes='sr-only', text='Remove badge'):
                     pass
-                with Icon_Cross():
+                with  FontAwesomeIcon(label="faCheck", fixedWidth=True, classes="w-5 h-5"):
                     pass
         badge_box.components.append(remove_button)
     

@@ -1,5 +1,6 @@
 import ofjustpy as oj
 from ofjustpy import icons
+from ofjustpy.icons import FontAwesomeIcon
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import conc_twtags, tstr, pd, grow, bg, green, W, fc, gray
 from html_writer.macro_module import macros, writer_ctx
@@ -9,7 +10,7 @@ from html_writer.macro_module import macros, writer_ctx
 def Simple(logo=None, twsty_tags=[], **kwargs):
 
     with writer_ctx:
-        with Div(classes=f"flex h-screen flex-col justify-between border-e bg-white {tstr(*twsty_tags)}") as comp_box:
+        with Div(classes=f"flex overflow-y-auto w-80 h-screen flex-col justify-between border-e bg-white {tstr(*twsty_tags)}") as comp_box:
             with Div(classes=" flex justify-center"):
                 with Span(classes="px-2 py-6 font-bold text-indigo-700 text-large uppercase leading-normal", text=logo):
                     pass
@@ -20,7 +21,7 @@ def Simple(logo=None, twsty_tags=[], **kwargs):
     def add_flat_item(key, label,  menu_box=menu_box, **kwargs):
         with writer_ctx:
             with Li(classes="justify-center px-4 py-2") as item_box:
-                with Button(key=key, classes= "rounded-lg border border-2 border-indigo-500/50 px-4 py-1 text-sm font-medium text-indigo-500 uppercase leading-normal hover:bg-gradient-to-bl hover:from-gray-200 hover:to-gray-200 hover:via-gray-100/5 w-52 overflow-x-auto shadow shadow-indigo-200  hover:shadow-md hower:shadow-indigo-300", text=label, **kwargs):
+                with Button(key=key, classes= "rounded-lg border border-2 border-indigo-500/50 px-4 py-1 text-sm font-medium text-indigo-500 uppercase leading-normal hover:bg-gradient-to-bl hover:from-gray-200 hover:to-gray-200 hover:via-gray-100/50 w-52 overflow-x-auto shadow shadow-indigo-200  hover:shadow-md hower:shadow-indigo-300 focus:bg-gradient-to-bl focus:border-indigo-500/50 focus:border ", text=label, **kwargs):
                     pass
 
         menu_box.components.append(item_box)
@@ -37,7 +38,7 @@ def Simple(logo=None, twsty_tags=[], **kwargs):
                         
 
                         with Span(classes='shrink-0 transition duration-300 group-open:-rotate-180'):
-                            with Icon_Chevrondown():
+                            with FontAwesomeIcon(label="faChevronDown"):
                                 pass
 
                         
@@ -48,7 +49,7 @@ def Simple(logo=None, twsty_tags=[], **kwargs):
         def add_flat_item(key, label, ul_box=ul_box, **kwargs):
             with writer_ctx:
                 with Li(classes="justify-center px-4") as li_box:
-                    with Button(key=key, classes='rounded-lg border border-2 border-indigo-500/50 px-4 py-1 text-sm font-medium text-indigo-500 uppercase leading-normal hover:bg-gradient-to-bl hover:from-gray-200 hover:to-gray-200 hover:via-gray-100/5 w-52 overflow-x-auto shadow shadow-indigo-200  hover:shadow-md hower:shadow-indigo-300', text=label, **kwargs):
+                    with Button(key=key, classes='rounded-lg border border-2 border-indigo-500/50 px-4 py-1 text-sm font-medium text-indigo-500 uppercase leading-normal hover:bg-gradient-to-bl hover:from-gray-200 hover:to-gray-200 hover:via-gray-100/50 w-52 overflow-x-auto shadow shadow-indigo-200  hover:shadow-md hower:shadow-indigo-300', text=label, **kwargs):
                                 pass
 
             ul_box.components.append(li_box)

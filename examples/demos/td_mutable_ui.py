@@ -7,7 +7,7 @@ app = oj.load_app()
 def on_click(dbref, msg, to_ms):
     ms_dbref = to_ms(dbref)
     # change background color to green-500 and font size to text-xl
-    ms_dbref.add_twsty_tags(bg/green/5, fz.xl)
+    ms_dbref.add_twsty_tags(bg/green/500, fz.xl)
     pass
 
 

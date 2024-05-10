@@ -19,7 +19,9 @@ app = oj.load_app()
 endpoint = oj.create_endpoint("demo_alert_comp",
                               childs = [breadcrumbs_component,
                                         chevrobackground_breadcrumbs_component
-                                        ]
+                                        ],
+                              # head_html = """<script src="https://cdn.tailwindcss.com"></script>""",
+                              body_classes="font-geist"
                    )
 oj.add_jproute("/", endpoint)
 

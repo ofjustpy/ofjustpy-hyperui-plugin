@@ -39,7 +39,9 @@ def Card_Type_1(href, title, author, image_src, content, published_date, reading
                         pass
 
             with Div(classes="mt-4") as description_section:
-                with P(classes="max-w-[40ch] text-sm text-gray-500", text=content):
+                with P(classes="text-sm text-gray-500",
+                       extra_classes="max-w-[40ch]",
+                       text=content):
                     pass
 
             with Dl(classes="mt-6 flex gap-4 sm:gap-6") as metadata_section:

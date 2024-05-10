@@ -5,9 +5,9 @@ from py_tailwind_utils import conc_twtags, tstr
 from html_writer.macro_module import macros, writer_ctx
 
 def Detailslist(striped=False, contained=False):
-    contained_classes = ""
+    contained_classes = "mx-auto max-w-screen-md px-4 py-8"
     if contained:
-        contained_classes = "rounded-lg border border-gray-100 py-3 shadow-sm"
+        contained_classes = "rounded-lg border border-gray-100 py-3 shadow-sm mx-auto max-w-screen-md px-4 py-8"
 
     with writer_ctx:
         with Div(classes=f"flow-root {contained_classes}") as comp_box:

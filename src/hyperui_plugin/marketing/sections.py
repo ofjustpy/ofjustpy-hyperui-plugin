@@ -37,7 +37,7 @@ def GridUSP():
                 with Div(classes='mt-8 grid grid-cols-1 gap-8 md:mt-16 md:grid-cols-2 md:gap-12 lg:grid-cols-3'):
                     with Div(classes='flex items-start gap-4'):
                         with Span(classes="shrink-0 rounded-lg bg-gray-800 p-4"):
-                            with Icon_Degree():
+                            with FontAwesomeIcon(label="faGraduationCap"):
                                 pass
 
                         with Div():
@@ -50,7 +50,7 @@ def GridUSP():
 
                     with Div(classes='flex items-start gap-4'):
                         with Span(classes='shrink-0 rounded-lg bg-gray-800 p-4'):
-                            with Icon_Degree():
+                            with FontAwesomeIcon(label="faGraduationCap"):
                                 pass
 
                         with Div():
@@ -63,7 +63,7 @@ def GridUSP():
                     with Div(classes='flex items-start gap-4'):
                         with Span(classes='shrink-0 rounded-lg bg-gray-800 p-4'):
 
-                            with Icon_Degree():
+                            with FontAwesomeIcon(label="faGraduationCap"):
                                 pass
 
                         with Div():
@@ -75,7 +75,7 @@ def GridUSP():
                                 pass                            
                     with Div(classes='flex items-start gap-4'):
                         with Span(classes='shrink-0 rounded-lg bg-gray-800 p-4'):
-                            with Icon_Degree():
+                            with FontAwesomeIcon(label="faGraduationCap"):
                                 pass
 
                         with Div():
@@ -89,7 +89,7 @@ def GridUSP():
 
                     with Div(classes='flex items-start gap-4'):
                         with Span(classes='shrink-0 rounded-lg bg-gray-800 p-4'):
-                            with Icon_Degree():
+                            with FontAwesomeIcon(label="faGraduationCap"):
                                 pass
 
                         with Div():
@@ -102,7 +102,7 @@ def GridUSP():
 
                     with Div(classes='flex items-start gap-4'):
                         with Span(classes='shrink-0 rounded-lg bg-gray-800 p-4'):
-                            with Icon_Degree():
+                            with FontAwesomeIcon(label="faGraduationCap"):
                                 pass
 
                         with Div():

@@ -32,7 +32,7 @@ def SimpleStacked():
         nonlocal checked
         with writer_ctx:
             with Div() as cb_item:
-                with RadioInput(key=key, classes='peer hidden', checked=checked):
+                with CheckboxInput(key=key, classes='peer hidden', checked=checked):
                     pass
 
                 with Label(for_='DeliveryStandard', classes='flex cursor-pointer items-center justify-between rounded-lg border border-gray-100 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200 peer-checked:border-blue-500 peer-checked:ring-1 peer-checked:ring-blue-500'):
@@ -63,7 +63,7 @@ def Variants():
         with writer_ctx:
             with Div() as cb_item:
                 with Label(key=key, classes= "flex cursor-pointer items-center justify-center rounded-md border border-gray-100 bg-white px-3 py-2 text-gray-900 hover:border-gray-200", extra_classes="has-[:checked]:border-blue-500 has-[:checked]:bg-blue-500 has-[:checked]:text-white",  ):
-                    with RadioInput(key=f"{key}_radioinput", classes='', checked=checked):
+                    with CheckboxInput(key=f"{key}_radioinput", classes='', checked=checked):
                         pass
                     
                     with P(classes='text-sm font-medium', text=text):

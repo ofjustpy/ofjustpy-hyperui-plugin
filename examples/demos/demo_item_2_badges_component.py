@@ -2,11 +2,14 @@ from py_tailwind_utils import *
 import ofjustpy as oj
 from ofjustpy import icons
 from hyperui_plugin.badges import Badge
+from ofjustpy.icons import FontAwesomeIcon
 
-from ofjustpy.icons import Icon_EuroCurrency
 simple_badge = Badge("Live")
-icon_badge = Badge( icon = Icon_EuroCurrency)
-icon_label_badge = Badge(label = "hello", icon = Icon_EuroCurrency)
+euro_icon = FontAwesomeIcon(label="faEur",
+                            size="1x",
+                            fixedWidth=True)
+icon_badge = Badge( icon = euro_icon)
+icon_label_badge = Badge(label = "hello", icon = euro_icon)
 
 label_badge_crossbtn = Badge(label = "hello")
 def on_click(dbref, msg, to_ms):

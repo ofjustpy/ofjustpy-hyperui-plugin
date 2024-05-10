@@ -1,6 +1,7 @@
 from ofjustpy import icons
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 import ofjustpy as oj
+from ofjustpy.icons import FontAwesomeIcon
 from py_tailwind_utils import conc_twtags, tstr, pd
 from html_writer.macro_module import macros, writer_ctx
 def Dropdown(key, title, href="#"):
@@ -14,15 +15,17 @@ def Dropdown(key, title, href="#"):
         pass
     with oj.uictx("tlctx") as tlctx:    
         with writer_ctx:
-            with HCCMutable_Div(classes="relative") as comp_box:
-                with HCCMutable_Div(classes="inline-flex items-center overflow-hidden rounded-md border bg-white"):
+            with Mutable_Div(key="x", classes="relative") as comp_box:
+                with Mutable_Div(key="y", classes="inline-flex items-center overflow-hidden rounded-md border bg-white"):
                     with A(href=href, classes="border-e px-4 py-2 text-sm/none text-gray-600 hover:bg-gray-50 hover:text-gray-700", text=title):
                         pass
                     with Button(key=key, classes="h-full p-2 text-gray-600 hover:bg-gray-50 hover:text-gray-700", on_click=lambda *args, ctx=tlctx:on_menudown_click(*args, ctx=tlctx)):
-                        with Icon_Chevrondown():
+                        with FontAwesomeIcon(label="faChevronDown",
+                                             classes="w-5 h-5",
+                                             ):
                             pass
-                with HCCMutable_Div(classes="absolute end-0 z-10 mt-2 w-56 rounded-md border border-gray-100 bg-white shadow-lg", role="menu"):
-                    with HCCMutable_Div(key="{key}_items_box", classes="p-2") as items_box:
+                with Mutable_Div(key="z", classes="absolute end-0 z-10 mt-2 w-56 rounded-md border border-gray-100 bg-white shadow-lg", role="menu"):
+                    with Mutable_Div(key="{items_box", classes="p-2") as items_box:
                         pass
                     pass
 

@@ -1,5 +1,6 @@
 import ofjustpy as oj
 from ofjustpy import icons
+from ofjustpy.icons import FontAwesomeIcon
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -31,7 +32,8 @@ def InlineDropdown():
                         with Span(classes='text-sm font-medium', text=' Availability '):
                             pass
                         with Span(classes='transition group-open:-rotate-180'):
-                            with Icon_Chevrondown():
+                            with FontAwesomeIcon(label="faChevronDown",
+                                                 classes="w-5 h-5"):
                                 pass
                             
 
@@ -77,7 +79,8 @@ def InlineDropdown():
                         with Span(classes='text-sm font-medium', text=' Price '):
                             pass
                         with Span(classes='transition group-open:-rotate-180'):
-                            with Icon_Chevrondown():
+                            with FontAwesomeIcon(label="faChevronDown"
+                                                 classes="w-5 h-5",):
                                 pass
                             pass
 
@@ -116,13 +119,16 @@ def StackedDropdown():
     with writer_ctx:
         with Div(classes='space-y-2') as comp_box:
             # Availability
-            with Details(classes='overflow-hidden rounded border border-gray-300 [&_summary::-webkit-details-marker]:hidden'):
+            with Details(classes='overflow-hidden rounded border border-gray-300',
+                         extra_classes = "[&_summary::-webkit-details-marker]:hidden"
+                         ):
                 with Summary(classes='flex cursor-pointer items-center justify-between gap-2 bg-white p-4 text-gray-900 transition'):
                     with Span(classes='text-sm font-medium', text=' Availability '):
                         pass
                     
                     with Span(classes='transition group-open:-rotate-180'):
-                        with Icon_Chevrondown():
+                        with FontAwesomeIcon(label="faChevronDown",
+                                             classes="w-5 h-5",):
                             pass
                         pass
 
@@ -166,7 +172,8 @@ def StackedDropdown():
                     with Span(classes='text-sm font-medium', text=' Price '):
                         pass
                     with Span(classes='transition group-open:-rotate-180'):
-                        with Icon_Chevrondown():
+                        with FontAwesomeIcon(label="faChevronDown",
+                                             classes="w-5 h-5",):
                             pass
                         pass
 

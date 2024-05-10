@@ -23,7 +23,8 @@ from html_writer.macro_module import macros, writer_ctx
 def SplitContentSlider():
     with writer_ctx:
         with Section(classes='bg-gray-50') as comp_box:
-            with Div(classes='mx-auto px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24', extra_classes="max-w-[1340px]"):
+            with Div(classes='mx-auto px-4 py-12 sm:px-6 lg:me-0 lg:py-16 lg:pe-0 lg:ps-8 xl:py-24',
+                     extra_classes="max-w-[1340px]"):
                 with Div(classes='grid grid-cols-1 gap-8 lg:grid-cols-3 lg:items-center lg:gap-16'):
                     with Div(classes='max-w-xl text-center ltr:sm:text-left rtl:sm:text-right'):
                         with H2(classes='text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl', text="Don't just take our word for it..."):
@@ -40,7 +41,7 @@ def SplitContentSlider():
                                 aria_label='Previous slide',
                                 key='keen-slider-previous-desktop'
                             ):
-                                with Icon_SliderPrev():
+                                with FontAwesomeIcon(label="faCircleChevronRight"):
                                     pass
                                 # Empty button for the visual representation of previous slide
                                 pass
@@ -49,7 +50,7 @@ def SplitContentSlider():
                                 aria_label='Next slide',
                                 key='keen-slider-next-desktop'
                             ):
-                                with Icon_SliderNext():
+                                with FontAwesomeIcon(label="faCircleChevronLeft"):
                                     pass
                                 # Empty button for the visual representation of next slide
                                 pass
@@ -61,22 +62,22 @@ def SplitContentSlider():
                                 ):
                                     with Div():
                                         with Div(classes='flex gap-0.5 text-green-500'):
-                                            with Icon_Rated():
+                                            with FontAwesomeIcon(label="faStar"):
                                                 pass
                                             
-                                            with Icon_Rated():
+                                            with FontAwesomeIcon(label="faStar"):
                                                 pass
 
-                                            with Icon_Rated():
+                                            with FontAwesomeIcon(label="faStar"):
                                                 pass
 
-                                            with Icon_Rated():
+                                            with FontAwesomeIcon(label="faStar"):
                                                 pass
                                             
-                                            with Icon_Rated():
+                                            with FontAwesomeIcon(label="faStar"):
                                                 pass
 
-                                            with Icon_Rated():
+                                            with FontAwesomeIcon(label="faStar"):
                                                 pass                                            
                                            
                                             

@@ -68,7 +68,7 @@ tlc = oj.PC.Container(childs = [oj.PC.StackV(childs = [oj.PC.Halign(list_contain
                                                        oj.PC.Halign(list_container_contained, twsty_tags=[bg/white]),
                                                        oj.PC.Halign(list_container_contained_striped, twsty_tags=[bg/white])
                                                        ],
-                                             twsty_tags=[space/y/8]
+                                             twsty_tags=[space/y/16]
                                              )],
                       twsty_tags=[mr/x/auto, bg/pink/"100/50"]
                       )

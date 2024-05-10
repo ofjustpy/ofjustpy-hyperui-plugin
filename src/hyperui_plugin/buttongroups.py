@@ -28,7 +28,7 @@ def WithIcons():
                 with Span(classes="sr-only", text=title):
                     pass
                 pass
-        abtn.components.append(icon())
+        abtn.components.append(icon)
         comp_box.components.append(abtn)
 
     comp_box.add_button = add_button

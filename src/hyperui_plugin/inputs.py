@@ -43,7 +43,7 @@ def WithIcon(key, label, placeholder):
                 pass
 
             with Span(classes='pointer-events-none absolute inset-y-0 end-0 grid w-10 place-content-center text-gray-500'):
-                with Icon_Emailat():
+                with FontAwesomeIcon(label="faEnvelope", classes="w-5 h-5",):
                     pass
                 pass
 
@@ -77,7 +77,7 @@ def SearchInputWithButton(key, label, placeholder):
                 with Button(key=f"{key}_btn", classes='text-gray-600 hover:text-gray-700') as search_button:
                     with Span(classes='sr-only', text='Search'):
                         pass
-                    with Icon_Search():
+                    with FontAwesomeIcon(label="faMagnifyingGlass", classes="w-5 h-5"):
                         pass
 
     return comp_box

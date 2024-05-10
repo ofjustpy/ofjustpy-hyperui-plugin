@@ -31,9 +31,12 @@ def WithBadge(twsty_tags=[], **kwargs):
     container = oj.PD.Ul(childs=[], twsty_tags=twsty_tags)
     bg_color = "bg-gray-100"
     text_color= "text-gray-700"
-    def add_item(text, href="#", badge=None, twsty_tags=[], **kwargs):
+    def add_item(text, href="#",
+                 badge=None,
+                 twsty_tags=[], **kwargs):
         nonlocal bg_color
         nonlocal text_color
+        #TODO:
         twsty_tags = conc_twtags(*encode_twstr(f"group flex items-center justify-between rounded-lg {bg_color} px-4 py-2 {text_color}"), *twsty_tags)
         
         bg_color = "hover:bg-gray-100 hover:text-gray-700"
@@ -43,9 +46,8 @@ def WithBadge(twsty_tags=[], **kwargs):
             childs.append(oj.PC.Span(twsty_tags=encode_twstr("shrink-0 rounded-full bg-gray-100 px-3 py-0.5 text-xs text-gray-600 group-hover:bg-gray-200 group-hover:text-gray-700"), text=badge)
                           )
             
-        container.components.append(oj.PD.Li(childs=[oj.PD.A(
-                                                             href=href,
-                                                             twsty_tags=twsty_tags,
+        container.components.append(oj.PD.Li(childs=[oj.PD.A(href=href,
+                                                             classes="group flex items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700",
                                                              childs = childs
                                                              
                                                              )
@@ -64,13 +66,14 @@ def WithIcon(twsty_tags=[], **kwargs):
     def add_item(text, icon, href="#",  twsty_tags=[], **kwargs):
         nonlocal bg_color
         nonlocal text_color
+        # TODO: there is bug in conc_twtags followed by encode_twstr
         twsty_tags = conc_twtags(*encode_twstr(f"flex items-center gap-2 rounded-lg {bg_color} px-4 py-2 {text_color}"), *twsty_tags)
         
         bg_color = "hover:bg-gray-100 hover:text-gray-700"
         text_color = "text-gray-500"
-        container.components.append(oj.PD.Li(childs=[oj.PD.A(
-                                                             href=href,
-                                                             twsty_tags=twsty_tags,
+        container.components.append(oj.PD.Li(childs=[oj.PD.A(href=href,
+                                                             #twsty_tags=twsty_tags,
+                                                             classes="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-gray-700",
                                                              childs = [icon,
                                                                        oj.PC.Span(text=text, twsty_tags=encode_twstr("text-sm font-medium"))
                                                                        ]
@@ -95,6 +98,7 @@ def WithIconAndBadge(twsty_tags=[], **kwargs):
         if badge:
             for_badge = "group justify-between"
         twsty_tags = conc_twtags(*encode_twstr(f"{for_badge} flex items-center gap-2 rounded-lg {bg_color} px-4 py-2 {text_color}"), *twsty_tags)
+        classes="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-gray-700"
         
         bg_color = "hover:bg-gray-100 hover:text-gray-700"
         text_color = "text-gray-500"
@@ -104,10 +108,11 @@ def WithIconAndBadge(twsty_tags=[], **kwargs):
         if badge:
             childs.append(oj.PC.Span(twsty_tags=encode_twstr("shrink-0 rounded-full bg-gray-100 px-3 py-0.5 text-xs text-gray-600 group-hover:bg-gray-200 group-hover:text-gray-700"), text=badge)
                           )
-            
-        container.components.append(oj.PD.Li(childs=[oj.PD.A(
-                                                             href=href,
-                                                             twsty_tags=twsty_tags,
+
+        
+        container.components.append(oj.PD.Li(childs=[oj.PD.A(href=href,
+                                                             #twsty_tags=twsty_tags,
+                                                             classes=classes,
                                                              childs = childs
                                                              
                                                              )
@@ -127,14 +132,16 @@ def WithIconAndBrandedAccent(twsty_tags=[], **kwargs):
         nonlocal bg_color
         nonlocal text_color
         nonlocal border_seen
+        # bug in conc_twtags over encode
         twsty_tags = conc_twtags(*encode_twstr(f"flex items-center gap-2 border-s-4 {border_seen} rounded-lg {bg_color} px-4 py-2 {text_color}"), *twsty_tags)
+        classes = "flex items-center gap-2 border-s-[3px] border-blue-500 bg-blue-50 px-4 py-3 text-blue-700"
         
         bg_color = "hover:bg-gray-50 hover:text-gray-700"
         text_color = "text-gray-500"
         border_seen = "border-transparent hover:border-gray-100"
-        container.components.append(oj.PD.Li(childs=[oj.PD.A(
-                                                             href=href,
-                                                             twsty_tags=twsty_tags,
+        container.components.append(oj.PD.Li(childs=[oj.PD.A(href=href,
+                                                             #twsty_tags=twsty_tags,
+                                                             classes=classes,
                                                              childs = [icon,
                                                                        oj.PC.Span(text=text, twsty_tags=encode_twstr("text-sm font-medium"))
                                                                        ]

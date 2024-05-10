@@ -16,7 +16,7 @@ dropdown_container.add_item("Unpublish Product")
 
 app = oj.load_app()
 endpoint = oj.create_endpoint("demo_dropdown",
-                              childs = [oj.PC.Halign(dropdown_container)
+                              childs = [oj.Halign(dropdown_container, content_type="mutable")
                                         ]
                    )
 oj.add_jproute("/", endpoint)

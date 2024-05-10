@@ -2,7 +2,7 @@ from ofjustpy import icons
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 import ofjustpy as oj
 from py_tailwind_utils import conc_twtags, tstr, pd, grow
-
+from ofjustpy.icons import FontAwesomeIcon
 from html_writer.macro_module import macros, writer_ctx
 
 def IntroActions(key, title, subtitle):
@@ -22,7 +22,7 @@ def IntroActions(key, title, subtitle):
                         with Button(key=f"{key}_viewWebsite",classes='inline-flex items-center justify-center gap-1.5 rounded-lg border border-gray-200 px-5 py-3 text-gray-500 transition hover:bg-gray-50 hover:text-gray-700 focus:outline-none focus:ring') as view_website_button:
                             with Span(classes='text-sm font-medium', text='View Website'):
                                 pass
-                            with Icon_Openlink():
+                            with FontAwesomeIcon(label="faExternalLinkAlt", mdi_label="open-in-new", classes="w-5 h-5",):
                                 pass
 
                         with Button(key="{key}_viewpost", classes='block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring', text='Create Post'):
@@ -51,14 +51,14 @@ def IntroWithSearchAndMiniNavigation(key):
                                 with Span(classes='sr-only', text='Search'):
                                     pass
 
-                                with Icon_Search():
+                                with FontAwesomeIcon(label="faMagnifyingGlass", classes="w-5 h-5",):
                                     pass
 
                         with A(href='#', classes='block shrink-0 rounded-full bg-white p-2.5 text-gray-600 shadow-sm hover:text-gray-700') as notification_link:
                             with Span(classes='sr-only', text='Notifications'):
                                 pass
 
-                            with Icon_Notification():
+                            with FontAwesomeIcon(label="faBell", classes="w-5 h-5",):
                                 pass
                     with Span(classes='block h-6 w-px rounded-full bg-gray-200', aria_hidden='true'):
                         pass

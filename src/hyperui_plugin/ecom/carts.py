@@ -1,5 +1,6 @@
 import ofjustpy as oj
 from ofjustpy import icons
+from ofjustpy.icons import FontAwesomeIcon
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -66,7 +67,9 @@ def Popup(bottom_banner):
     all_items_root = oj.PC.Div(twsty_tags=[mr/st/4, space/y/6], childs = [all_items, bottom_banner])
 
     close_button = oj.AD.Button(key="close_{key}",
-                         childs = [oj.PC.Span(twsty_tags=[srs.only], text="Close cart"), icons.Icon_Cross()],
+                         childs = [oj.PC.Span(twsty_tags=[srs.only], text="Close cart"), FontAwesomeIcon(label="faCross",
+                                                                                                         classes="w-5 h-5",)
+                                   ],
                          twsty_tags=encode_twstr("absolute end-4 top-4 text-gray-600 transition hover:scale-110")
                          )
                                    
@@ -163,13 +166,14 @@ def Contained():
                                                        value='1',
                                                        placeholder='1',
                                                        key='Line1Qty',
-                                                       classes='h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 focus:outline-none', extra_classes="[-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"):
+                                                       classes='h-8 w-12 rounded border-gray-200 bg-gray-50 p-0 text-center text-xs text-gray-600 focus:outline-none',
+                                                       extra_classes="[-moz-appearance:_textfield] [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none"):
                                             
                                             pass
                                         with Button(key="abtn", classes='text-gray-600 transition hover:text-red-600'):
                                             with Span(classes='sr-only', text='Remove item'):
                                                 pass
-                                            with Icon_Delete():
+                                            with FontAwesomeIcon(label="faTrash",classes="w-5 h-5",):
                                                 pass
 
                         with Div(classes='mt-8 flex justify-end border-t border-gray-100 pt-8'):

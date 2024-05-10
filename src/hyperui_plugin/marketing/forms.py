@@ -42,7 +42,7 @@ def Login():
                             pass
 
                         with Span(classes='absolute inset-y-0 end-0 grid place-content-center px-4'):
-                            with Icon_Emailat():
+                            with FontAwesomeIcon(label="faAt"):
                                 pass
                             pass
 
@@ -55,7 +55,7 @@ def Login():
                             pass
 
                         with Span(classes='absolute inset-y-0 end-0 grid place-content-center px-4'):
-                            with Icon_Emailat():
+                            with FontAwesomeIcon(label="faAt"):
                                 pass
                             pass
 

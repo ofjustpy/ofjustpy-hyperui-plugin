@@ -59,7 +59,10 @@ def WithVariant(img_src, img_src_hover, desc, sticker, variant_text):
 def WithDescription(img_src, desc, desc_subtitle, price):
     with writer_ctx:
         with A(href="#", classes="group max-w-md block") as comp_box:
-            with Img(src=img_src, alt="", classes="h-[350px] w-full object-cover sm:h-[450px]"):
+            with Img(src=img_src, alt="",
+                     classes="w-full object-cover ",
+                     extra_classes="h-[350px] sm:h-[450px]"
+                     ):
                 pass
 
             with Div(classes="mt-3 flex justify-between text-sm"):
@@ -67,7 +70,9 @@ def WithDescription(img_src, desc, desc_subtitle, price):
                     with H3(classes="text-gray-900 group-hover:underline group-hover:underline-offset-4", text=desc):
                         pass
 
-                    with P(classes="mt-1.5 max-w-[45ch] text-xs text-gray-500", text=desc_subtitle):
+                    with P(classes="mt-1.5  text-xs text-gray-500",
+                           extra_classes="max-w-[45ch]",
+                           text=desc_subtitle):
                         pass
 
                 with P(classes="text-gray-900", text=price):

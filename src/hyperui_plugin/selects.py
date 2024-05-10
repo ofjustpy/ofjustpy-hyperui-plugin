@@ -1,4 +1,5 @@
 import ofjustpy as oj
+from ofjustpy.icons import FontAwesomeIcon
 from html_writer.macro_module import macros, writer_ctx
 
 
@@ -54,6 +55,7 @@ def BaseGroup(key, title):
 
 
 #TODO: Not working; because oj ignores list attribute
+#TODO: Icon_IncrementDecrement() is replaced with Question mark circle
 def Datalist(key, title):
     with writer_ctx:
         with Div() as comp_box:
@@ -64,7 +66,7 @@ def Datalist(key, title):
                 with TextInput(key=key, classes="w-full rounded-lg p-2 border border-gray-300 pe-10 text-gray-700 sm:text-sm", extra_classes="[&::-webkit-calendar-picker-indicator]:opacity-0", placeholder="Please Select", list=f"dl_{key}"):
                     pass
                 with Span(classes="absolute inset-y-0 end-0 flex w-8 items-center"):
-                    with Icon_IncrementDecrement():
+                    with FontAwesomeIcon(label="faCircleQuestion"): 
                         pass
                     pass
             with Datalist(name="HeadlineAct", key=f"dl_{key}") as dl_box:

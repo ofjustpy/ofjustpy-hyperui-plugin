@@ -31,7 +31,7 @@ def BackgroundAccentBorder():
                     with H2(classes="font-medium", text=question):
                         pass
 
-                    with Icon_Plus():
+                    with FontAwesomeIcon(label="faPlus", classes="w-5 h-5",):
                         pass
                     
                 with P(classes="mt-4 px-4 leading-relaxed text-gray-700", text=answer):

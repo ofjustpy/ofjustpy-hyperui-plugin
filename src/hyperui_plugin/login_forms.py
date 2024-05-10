@@ -1,33 +1,43 @@
 from html_writer.macro_module import macros, writer_ctx
 import ofjustpy as oj
+from ofjustpy.icons import FontAwesomeIcon
 def SplitWithGraphic(key):
     with writer_ctx:
         with Section(classes='bg-white') as comp_box:
             with Div(classes='lg:grid lg:min-h-screen lg:grid-cols-12'):
                 with Aside(classes='relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6'):
-                    with Img(alt='Pattern', src='https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', classes='absolute inset-0 h-full w-full object-cover'):
+                    with Img(alt='Pattern',
+                             src='https://images.unsplash.com/photo-1605106702734-205df224ecce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', classes='absolute inset-0 h-full w-full object-cover'):
                         pass
 
                 with Main(classes='flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6'):
                     with Div(classes='max-w-xl lg:max-w-3xl'):
-                        with A(classes='block text-blue-600', href='/'):
-                            with Span(classes='sr-only', text='Home'):
+                        with A(classes='block text-blue-600',
+                               href='/'):
+                            with Span(classes='sr-only',
+                                      text='Home'):
                                 pass
-                            with Icon_Squid():
+                            with FontAwesomeIcon(label="faHippo", classes="w-5 h-5",):
                                 pass
 
-                        with H1(classes='mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl', text='Welcome to Squid 🦑'):
+                        with H1(classes='mt-6 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl',
+                                text='Welcome to Squid 🦑'):
                             pass
 
                         with P(classes='mt-4 leading-relaxed text-gray-500', text='Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam dolorum aliquam, quibusdam aperiam voluptatum.'):
                             pass
 
-                        with Form(key=key, classes='mt-8 grid grid-cols-6 gap-6', action='#'):
+                        with Form(key=key,
+                                  classes='mt-8 grid grid-cols-6 gap-6', action='#'):
                             with Div(classes='col-span-6 sm:col-span-3'):
-                                with Label(for_='FirstName', classes='block text-sm font-medium text-gray-700', text='First Name'):
+                                with Label(for_='FirstName',
+                                           classes='block text-sm font-medium text-gray-700',
+                                           text='First Name'):
                                     pass
 
-                                with TextInput(type='text', key='FirstName', name='first_name', classes='mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm'):
+                                with TextInput(type='text',
+                                               key='FirstName',
+                                               name='first_name', classes='mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm'):
                                     pass
 
                             with Div(classes='col-span-6 sm:col-span-3'):
@@ -100,7 +110,7 @@ def SplitWithContent():
                         with A(classes='block text-white', href='/'):
                             with Span(classes='sr-only', text='Home'):
                                 pass
-                            with Icon_Squid():
+                            with FontAwesomeIcon(label="faHippo", classes="w-5 h-5",):
                                 pass
 
                         with H2(classes='mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl', text='Welcome to Squid 🦑'):
@@ -115,7 +125,7 @@ def SplitWithContent():
                             with A(classes='inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 sm:h-20 sm:w-20', href='/'):
                                 with Span(classes='sr-only', text='Home'):
                                     pass
-                                with Icon_Squid():
+                                with FontAwesomeIcon(label="faHippo", classes="w-5 h-5",):
                                     pass
 
                             with H1(classes='mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl', text='Welcome to Squid 🦑'):

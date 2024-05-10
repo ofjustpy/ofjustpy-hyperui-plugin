@@ -1,14 +1,18 @@
 import ofjustpy as oj
+from ofjustpy.icons import FontAwesomeIcon
 from html_writer.macro_module import macros, writer_ctx
+oj.set_style("un")
 def Simple():
     with writer_ctx:
         with Nav() as comp_box:
-            with Ol(classes="flex items-center gap-1 text-sm text-gray-600") as ol_box:
+            with Ul(classes="flex items-center gap-1 text-sm text-gray-600") as ol_box:
                 with Li():
                     with A(href="#", classes="block transition hover:text-gray-700"):
                         with Span(classes="sr-only", text="Home"):
                             pass
-                        with Icon_Home():
+                        with FontAwesomeIcon(label="faHouse",
+                                             classes="w-5 h-5",
+                                             ):
                             pass
                         
                         pass
@@ -17,7 +21,9 @@ def Simple():
     def add_item(text, href="#", ol_box=ol_box, **kwargs):
         with writer_ctx:
             with Li(classes="rtl:rotate-180") as sep_box:
-                with Icon_BreadcrumbSepArrow():
+                with FontAwesomeIcon(label="faAngleRight",
+                                     classes="w-5 h-5",
+                                     ):
                     pass
         ol_box.components.append(sep_box)
         with writer_ctx:
@@ -42,7 +48,9 @@ def ChevronBackground():
             with Ol(classes="flex overflow-hidden rounded-lg border border-gray-200 text-gray-600") as ol_box:
                 with Li(classes="flex items-center"):
                     with A(href="#", classes="flex h-10 items-center gap-1.5 bg-gray-100 px-4 transition hover:text-gray-900"):
-                        with Icon_Home():
+                        with FontAwesomeIcon(label="faHouse",
+                                             classes="w-5 h-5"
+                                             ):
                             pass
                         with Span(classes="ms-1.5 text-xs font-medium", text="Home"):
                             pass

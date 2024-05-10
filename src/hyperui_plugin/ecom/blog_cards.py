@@ -80,7 +80,9 @@ def Bordered(image_url, alt_text, title, content, link):
 
 def GradientBorder(date, title, tags):
     with writer_ctx:
-        with Article(classes="hover:animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition  hover:shadow-sm ") as comp_box:
+        with Article(classes="rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition  hover:shadow-sm ",
+                     extra_classes="hover:animate-background"
+                     ) as comp_box:
             with Div(classes="rounded-3xl bg-white p-4 !pt-20 sm:p-6"):
                 with Time(classes="block text-xs text-gray-500", datetime=date, text=date):
                     pass
