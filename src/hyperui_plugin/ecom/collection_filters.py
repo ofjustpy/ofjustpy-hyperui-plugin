@@ -79,7 +79,7 @@ def InlineDropdown():
                         with Span(classes='text-sm font-medium', text=' Price '):
                             pass
                         with Span(classes='transition group-open:-rotate-180'):
-                            with FontAwesomeIcon(label="faChevronDown"
+                            with FontAwesomeIcon(label="faChevronDown",
                                                  classes="w-5 h-5",):
                                 pass
                             pass

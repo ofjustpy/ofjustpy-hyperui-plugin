@@ -289,3 +289,19 @@ def SplitWithHeading():
         
          
 
+
+def BaseWithHighlightedActiveLink():
+    comp_box = oj.PD.Ul()
+
+    def add_item():
+        oj.PD.Li(childs= [oj.Mutable.Button(classes="flex items-center gap-2 border-s-[3px] border-blue-500 bg-blue-50 px-4 py-3 text-blue-700", childs = [oj.PD.Span(classes="text-sm font-medium", text=text)
+
+            ]
+
+                                    )
+                          ]
+                 )
+        
+    comp_box.add_item = add_item
+    return comp_box
+
