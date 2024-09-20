@@ -5,14 +5,16 @@ from py_tailwind_utils import conc_twtags, tstr, pd, grow, bg, green, W, fc, gra
 
 
 def Simple(key, **kwargs):
-    cbtn = oj.AC.CheckboxInput(key=key, checked=False,
+    cbtn = oj.AC.CheckboxInput(key=key, checked=False, type="checkbox",
                                twsty_tags=encode_twstr("peer sr-only"),
                                **kwargs)
-    toggle = oj.PD.Label(twsty_tags=encode_twstr("relative h-8 w-14 cursor-pointer"), childs = [ cbtn, 
-    oj.PC.Span(twsty_tags=encode_twstr("absolute inset-0 w-14 rounded-full bg-gray-300 transition peer-checked:bg-green-500")),
-oj.PC.Span(twsty_tags=encode_twstr("absolute inset-y-0 start-0 m-1 h-6 w-6 rounded-full bg-white transition-all peer-checked:start-6"))
-    ]
-            )
+    toggle = oj.PD.Label(twsty_tags=encode_twstr("relative inline-block h-6 w-12 cursor-pointer rounded-full bg-gray-300 transition"),
+                         extra_classes="[-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-green-500",
+                         childs = [ cbtn,
+                                    oj.PC.Span(twsty_tags=encode_twstr("absolute inset-y-0 start-0 m-1 size-4 rounded-full bg-white transition-all peer-checked:start-6")
+                                               )
+                                   ]
+                         )
     return toggle
 
 
@@ -45,6 +47,9 @@ def Material(key, **kwargs):
                         pass
 
     return comp_box
+
+
+
 
 
 #TODO: toggling data-unchecked-icon, data-checked-icon is essential for this to work

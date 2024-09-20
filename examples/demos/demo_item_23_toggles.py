@@ -14,8 +14,10 @@ from hyperui_plugin.toggles import  (Simple,
                                      Material,
                                      #SimpleWithIcon
                                           )
-
-simple_togglebtn = Simple(key="stbtn")
+def on_checkbox_click(dbref, msg, to_ms):
+    print("on checkbox click = ", msg.value)
+    
+simple_togglebtn = Simple(key="stbtn", on_change = on_checkbox_click)
 apple_togglebtn = Apple(key="atbtn")
 material_togglebtn = Material(key="mtbtn")
 # simpleicon_togglebtn = SimpleWithIcon(key="sitbtn")

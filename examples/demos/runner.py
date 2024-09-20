@@ -5,6 +5,7 @@ def page_builder(key, childs, **kwargs):
     return oj.default_page_builder(key=key,
                                    childs=childs,
                                    rendering_type="SSR",
+                                   head_html =  """<script src="https://cdn.tailwindcss.com"></script> """,
                                    **kwargs)
 
 import ofjustpy as oj
@@ -30,7 +31,7 @@ with oj.PageBuilderCtx(page_builder):
     # import demo_item_20_tables
     # import demo_item_21_tabs
     # import demo_item_22_textareas
-    # import demo_item_23_toggles
+    import demo_item_23_toggles
     # import demo_item_24_verticalmenu
     # import demo_item_25_ecom_carts  # problem with encoding decoding text-gray-600
     # import demo_item_26_collection_cards
@@ -43,7 +44,7 @@ with oj.PageBuilderCtx(page_builder):
     # import demo_item_33_banners
     # import demo_item_34_blog_cards
     # import demo_item_35_buttons
-    import demo_item_36_cards
+    # import demo_item_36_cards
     # import demo_item_37_cta
     # import demo_item_38_faqs
     # import demo_item_39_footers # issues with encode/decode
