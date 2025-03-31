@@ -4,13 +4,13 @@ from html_writer.macro_module import macros, writer_ctx
 
 
 # TODO: do we need name argument
-def Base(key, title):
+def Base(key, title, **kwargs):
     with writer_ctx:
         with Div() as comp_box:
             with Label(for_='HeadlineAct', classes='block text-sm font-medium text-gray-900', text=title):
                 pass
 
-            with Select(key=key, classes='mt-1.5 p-2 w-full rounded-lg bg-white border border-gray-300 text-gray-700 sm:text-sm') as select_box:
+            with Select(key=f"{key}_select_box", classes='mt-1.5 p-2 w-full rounded-lg bg-white border border-gray-300 text-gray-700 sm:text-sm', **kwargs) as select_box:
                 with Option(value='', text='Please select'):
                     pass
 
@@ -22,18 +22,21 @@ def Base(key, title):
         select_box.components.append(opt_item)
 
     comp_box.add_option = add_option
+    comp_box.select_box = select_box
     return comp_box
 
 
-def BaseGroup(key, title):
-    with writer_ctx:
-        with Div() as comp_box:
-            with Label(for_=title, classes='block text-sm font-medium text-gray-900', text=title):
-                pass
-
-            with Select(key=key, classes='mt-1.5 p-2 w-full rounded-lg bg-white border border-gray-300 text-gray-700 sm:text-sm') as select_box:
-                with Option(value='', text='Please select'):
+def BaseGroup(key, title, **kwargs):
+    with oj.uictx(key) as ctx_:
+        with writer_ctx:
+            with Div(**kwargs) as comp_box:
+                with Label(for_=title, classes='block text-sm font-medium text-gray-900', text=title):
                     pass
+
+                with Select(key="select_box",
+                            classes='mt-1.5 p-2 w-full rounded-lg bg-white border border-gray-300 text-gray-700 sm:text-sm') as select_box:
+                    with Option(value='', text='Please select'):
+                        pass
 
     def add_optgroup(label, select_box=select_box):
         with writer_ctx:
@@ -52,6 +55,7 @@ def BaseGroup(key, title):
         return optgroup_box
     comp_box.add_optgroup = add_optgroup
     return comp_box
+
 
 
 #TODO: Not working; because oj ignores list attribute
