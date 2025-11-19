@@ -126,7 +126,9 @@ def WithLabel(key, label, placeholder):
 def FloatingLabel(key, label, placeholder):
     with writer_ctx:
         with Label(for_='Username', classes='relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600') as comp_box:
-            with TextInput(type='text', key=key, classes='peer border-none bg-transparent placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0', placeholder=placeholder):
+            # placeholder-transparent removed
+            #. TODO: use tailwind v3/v4 placeholder:
+            with TextInput(type='text', key=key, classes='peer border-none bg-transparent  focus:border-transparent focus:outline-none focus:ring-0', placeholder=placeholder):
                 pass
 
             with Span(classes='pointer-events-none absolute start-2.5 top-0 -translate-y-1/2 bg-white p-0.5 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-xs', text=label):
@@ -147,7 +149,9 @@ def FloatingLabel(key, label, placeholder):
 def FloatingLabelInside(key, label, placeholder):
     with writer_ctx:
         with Label(for_='UserEmail', classes='relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600') as comp_box:
-            with TextInput(type='email', key=key, placeholder=placeholder, classes='peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm'):
+            # removed placeholder-transparent
+            # TODO: 
+            with TextInput(type='email', key=key, placeholder=placeholder, classes='peer h-8 w-full border-none bg-transparent p-0  focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm'):
                 pass
 
             with Span(classes='absolute start-3 top-3 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs', text=label):
@@ -166,7 +170,8 @@ def FloatingLabelInside(key, label, placeholder):
 def FloatingLabelUnderline(key, label, placeholder):
     with writer_ctx:
         with Label(for_='UserEmail', classes='relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600') as comp_box:
-            with TextInput(type='email', key=key, placeholder=placeholder, classes='peer h-8 w-full border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm'):
+            # placeholder-transparent
+            with TextInput(type='email', key=key, placeholder=placeholder, classes='peer h-8 w-full border-none bg-transparent p-0  focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm'):
                 pass
 
             with Span(classes='absolute start-0 top-2 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-2 peer-focus:text-xs', text=label):

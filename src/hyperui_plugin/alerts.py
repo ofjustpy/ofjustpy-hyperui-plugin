@@ -110,23 +110,28 @@ def Content(title='', content=''):
 
     return alert_div
 
-def WarningContent(title='', content=''):
+def WarningContent(title='', content='', **kwargs):
     with writer_ctx:
         with Div(role='alert', classes='rounded border-s-4 border-red-500 bg-red-50 p-4') as alert_div:
 
             with Div(classes="flex items-center gap-2 text-red-800"):
-                with FontAwesomeIcon(
-                        label="faTriangleExclamation",
-                        size="1x", 
-                        fixedWidth=True,
-                        classes="w-5 h-5",
-                ):
+                with LucideIcon(label="eyeoff"
+
+                        ):
+                # with FontAwesomeIcon(
+                #         label="faTriangleExclamation",
+                #         size="1x", 
+                #         fixedWidth=True,
+                #         classes="w-5 h-5",
+                # ):
+                #     pass
                     pass
                     
                 with Strong(classes='block font-medium text-red-800', text=title):
                     pass
 
-            with P(classes='mt-2 text-sm text-red-700', text=content):
+            with P(classes='mt-2 text-sm text-red-700', text=content) as inbox:
                 pass
+
 
     return alert_div
