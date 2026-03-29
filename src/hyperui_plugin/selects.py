@@ -1,22 +1,19 @@
-import ofjustpy as oj
-from ofjustpy.icons import FontAwesomeIcon
-from html_writer.macro_module import macros, writer_ctx
-
-
+import kavya as kv 
+#from ofjustpy.icons import FontAwesomeIcon
+from kavya.dsl import macros, MuCtx
+from py_tailwind_utils import encode_twstr
 # TODO: do we need name argument
 def Base(key, title, **kwargs):
-    with writer_ctx:
+    with MuCtx:
         with Div() as comp_box:
-            with Label(for_='HeadlineAct', classes='block text-sm font-medium text-gray-900', text=title):
+            with Label(for_='HeadlineAct', classes='block text-sm font-medium', text=title):
                 pass
 
-            with Select(key=f"{key}_select_box", classes='mt-1.5 p-2 w-full rounded-lg bg-white border border-gray-300 text-gray-700 sm:text-sm', **kwargs) as select_box:
-                with Option(value='', text='Please select'):
-                    pass
-
+            with AD.Select(key=f"{key}_select_box", twsty_tags=encode_twstr('mt-1.5 p-2  rounded-lg border sm:text-sm'),  **kwargs) as select_box:
+                pass
     def add_option(value, text, select_box=select_box):
-        with writer_ctx:
-            with Option(value=value, text=text) as opt_item:
+        with MuCtx:
+            with Option(value=value, text=text, extra_classes="bg-primary-200") as opt_item:
                     pass
 
         select_box.components.append(opt_item)
@@ -27,24 +24,23 @@ def Base(key, title, **kwargs):
 
 
 def BaseGroup(key, title, **kwargs):
-    with oj.uictx(key) as ctx_:
-        with writer_ctx:
-            with Div(**kwargs) as comp_box:
-                with Label(for_=title, classes='block text-sm font-medium text-gray-900', text=title):
+
+    with MuCtx:
+        with Div(**kwargs) as comp_box:
+            with Label(for_=title, twsty_tags=encode_twstr('block text-sm font-medium'), text=title):
+                pass
+
+            with AD.Select(key=key,
+                           twsty_tags=encode_twstr('mt-1.5 p-2  rounded-lg border sm:text-sm')) as select_box:
                     pass
 
-                with Select(key="select_box",
-                            classes='mt-1.5 p-2 w-full rounded-lg bg-white border border-gray-300 text-gray-700 sm:text-sm') as select_box:
-                    with Option(value='', text='Please select'):
-                        pass
-
     def add_optgroup(label, select_box=select_box):
-        with writer_ctx:
-            with Optgroup(label=label) as optgroup_box:
+        with MuCtx:
+            with PD.Optgroup(label=label) as optgroup_box:
                 pass
         
         def add_option(value, text, optgroup_box=optgroup_box):
-            with writer_ctx:
+            with MuCtx:
                 with Option(value=value, text=text) as opt_item:
                         pass
 
@@ -61,7 +57,7 @@ def BaseGroup(key, title, **kwargs):
 #TODO: Not working; because oj ignores list attribute
 #TODO: Icon_IncrementDecrement() is replaced with Question mark circle
 def Datalist(key, title):
-    with writer_ctx:
+    with MuCtx:
         with Div() as comp_box:
             with Label(for_='HeadlineAct', classes='block text-sm font-medium text-gray-900', text=title):
                 pass
@@ -77,7 +73,7 @@ def Datalist(key, title):
                 pass
                 
     def add_option(value, text, dl_box=dl_box):
-        with writer_ctx:
+        with MuCtx:
             with Option(value=value, text=text) as opt_item:
                     pass
 

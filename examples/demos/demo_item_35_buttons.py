@@ -1,39 +1,24 @@
-from hyperui_plugin.marketing.buttons import  (Simple_Solid,
-                                               Simple_Blank,
-                                               GradientBorder,
-                                               GradientBorder_Oval,
-                                               CurtainClose
-                                                )
+import macropy.activate 
+import hyperui_plugin as hui
+
 
 from py_tailwind_utils import *
 
-import ofjustpy as oj
-oj.set_style("un")
-app = oj.load_app()
+import kavya as kv
+kv.set_style("un")
+app = kv.load_app()
+render_rst_btn = hui.revealHiddenStaticBorderOnHoverBordered(key="render_rst_btn",
+                                                             text="Render Rst")
 
-ss_btn = Simple_Solid("ss", "Download")
-sb_btn = Simple_Blank("sb", "Download")
 
-gb_btn = GradientBorder("gb", "Download")
-gbo_btn = GradientBorder_Oval("gbo", "Download")
 
-cc_l = CurtainClose("ccl", "Download")
-cc_r = CurtainClose("ccl", "Download", "right")
-cc_b = CurtainClose("ccl", "Download", "bottom")
-cc_t = CurtainClose("ccl", "Download", "top")
-
-content = [oj.PC.Halign(ss_btn),
-                                       oj.PC.Halign(sb_btn),
-                                       oj.PC.Halign(gb_btn),
-                                       oj.PC.Halign(gbo_btn),
-                                       oj.PC.Halign(cc_l),
-                                       oj.PC.Halign(cc_r),
-                                       oj.PC.Halign(cc_b),
-                                       oj.PC.Halign(cc_t),
-                                       ]
-
-endpoint = oj.create_endpoint("buttons",
-                              childs =[oj.PC.Div(childs = content, twsty_tags=[space/y/8])],
-                              title = "Buttons"
+endpoint = kv.create_endpoint("buttons",
+                              childs = [
+                                  render_rst_btn
+                                        ],
+                              title="Side Menu",
+                              svelte_bundle_dir="ssr",
+                              rendering_type = "MutableSSR",
+                              skeleton_data_theme = "seafoam",
                               )
-oj.add_jproute("/", endpoint)
+kv.add_route("/", endpoint)

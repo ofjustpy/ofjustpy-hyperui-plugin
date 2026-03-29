@@ -1,15 +1,23 @@
 import macropy.activate
-import ofjustpy as oj
-oj.set_style("un")
+import kavya as kv 
+kv.set_style("un")
+
+
 def page_builder(key, childs, **kwargs):
-    return oj.default_page_builder(key=key,
+    return kv.api.webpage_builder.default_page_builder(key=key,
                                    childs=childs,
-                                   rendering_type="SSR",
-                                   head_html =  """<script src="https://cdn.tailwindcss.com"></script> """,
+
+                                                       rendering_type=  "SSR",
+                                                       head_html =  """<script src="https://cdn.tailwindcss.com"></script> """,
+                                                                                        ssr_bundle_dir = "ssr",
+                                                       skeleton_data_theme="mint",
+
+                                                       
+                                                       
                                    **kwargs)
 
-import ofjustpy as oj
-with oj.PageBuilderCtx(page_builder):
+
+with kv.PageBuilderCtx(page_builder):
     # import demo_item_1_alert_component
     # import demo_item_2_badges_component
     # import demo_item_3_breadcrumbs
@@ -24,14 +32,14 @@ with oj.PageBuilderCtx(page_builder):
     # import demo_item_12_media_alert
     # import demo_item_13_pagination
     # import demo_item_15_radiogroups #not working
-    # import demo_item_16_selects
+    import demo_item_16_selects
     # import demo_item_17_sideMenu # problem with twsty_tags
     # import demo_item_18_stats
     # import demo_item_19_steps
     # import demo_item_20_tables
     # import demo_item_21_tabs
     # import demo_item_22_textareas
-    import demo_item_23_toggles
+    #import demo_item_23_toggles
     # import demo_item_24_verticalmenu
     # import demo_item_25_ecom_carts  # problem with encoding decoding text-gray-600
     # import demo_item_26_collection_cards
@@ -59,4 +67,4 @@ with oj.PageBuilderCtx(page_builder):
 
 
 
-app = oj.load_app()
+app = kv.load_app()

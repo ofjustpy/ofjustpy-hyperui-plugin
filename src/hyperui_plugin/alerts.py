@@ -1,5 +1,4 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
 from html_writer.macro_module import macros, writer_ctx
 
 def Popup(key, title='', desc=''):

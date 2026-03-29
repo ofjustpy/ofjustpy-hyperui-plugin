@@ -1,25 +1,23 @@
-import ofjustpy as oj
-from ofjustpy import icons
-from ofjustpy.icons import FontAwesomeIcon
+import kavya as kv
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import conc_twtags, tstr, pd, grow, bg, green, W, fc, gray
-from html_writer.macro_module import macros, writer_ctx
+from kavya.dsl import macros, MuCtx
 
 
 
 def Simple(logo=None, twsty_tags=[], **kwargs):
 
-    with writer_ctx:
-        with Div(classes=f"flex overflow-y-auto w-80 h-screen flex-col justify-between border-e bg-white {tstr(*twsty_tags)}") as comp_box:
+    with MuCtx:
+        with Div(classes=f"flex overflow-y-auto w-80 h-screen flex-col justify-between border-e  {tstr(*twsty_tags)}") as comp_box:
             with Div(classes=" flex justify-center"):
                 with Span(classes="px-2 py-6 font-bold text-indigo-700 text-large uppercase leading-normal", text=logo):
                     pass
 
-            with Ul(classes="mt-6 flex-1") as menu_box:
+            with PD.Ul(classes="mt-6 flex-1") as menu_box:
                 pass
             
     def add_flat_item(key, label,  menu_box=menu_box, **kwargs):
-        with writer_ctx:
+        with MuCtx:
             with Li(classes="justify-center px-4 py-2") as item_box:
                 with Button(key=key, classes= "rounded-lg border border-2 border-indigo-500/50 px-4 py-1 text-sm font-medium text-indigo-500 uppercase leading-normal hover:bg-gradient-to-bl hover:from-gray-200 hover:to-gray-200 hover:via-gray-100/50 w-52 overflow-x-auto shadow shadow-indigo-200  hover:shadow-md hower:shadow-indigo-300 focus:bg-gradient-to-bl focus:border-indigo-500/50 focus:border ", text=label, **kwargs):
                     pass
@@ -27,7 +25,7 @@ def Simple(logo=None, twsty_tags=[], **kwargs):
         menu_box.components.append(item_box)
         
     def add_group_item(title, menu_box=menu_box):
-        with writer_ctx:
+        with MuCtx:
             with Li(classes='') as group_box:
                 with Details(classes='group', extra_classes="[&_summary::-webkit-details-marker]:hidden"):
                     with Summary(classes='flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700'):
@@ -43,11 +41,11 @@ def Simple(logo=None, twsty_tags=[], **kwargs):
 
                         
 
-                    with Ul(classes='mt-3 flex-1 space-y-3') as ul_box:
+                    with PD.Ul(classes='mt-3 flex-1 space-y-3') as ul_box:
                         pass
 
         def add_flat_item(key, label, ul_box=ul_box, **kwargs):
-            with writer_ctx:
+            with MuCtx:
                 with Li(classes="justify-center px-4") as li_box:
                     with Button(key=key, classes='rounded-lg border border-2 border-indigo-500/50 px-4 py-1 text-sm font-medium text-indigo-500 uppercase leading-normal hover:bg-gradient-to-bl hover:from-gray-200 hover:to-gray-200 hover:via-gray-100/50 w-52 overflow-x-auto shadow shadow-indigo-200  hover:shadow-md hower:shadow-indigo-300', text=label, **kwargs):
                                 pass
