@@ -1,17 +1,17 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import conc_twtags, tstr, pd, grow, bg, green, W, fc, gray, space, y
 
 
 def Simple(key, **kwargs):
-    cbtn = oj.AC.CheckboxInput(key=key, checked=False, type="checkbox",
+    cbtn = kv.AC.CheckboxInput(key=key, checked=False, type="checkbox",
                                twsty_tags=encode_twstr("peer sr-only"),
                                **kwargs)
-    toggle = oj.PD.Label(twsty_tags=encode_twstr("relative inline-block h-6 w-12 cursor-pointer rounded-full bg-gray-300 transition"),
+    toggle = kv.PD.Label(twsty_tags=encode_twstr("relative inline-block h-6 w-12 cursor-pointer rounded-full bg-gray-300 transition"),
                          extra_classes="[-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-green-500",
                          childs = [ cbtn,
-                                    oj.PC.Span(twsty_tags=encode_twstr("absolute inset-y-0 start-0 m-1 size-4 rounded-full bg-white transition-all peer-checked:start-6")
+                                    kv.PC.Span(twsty_tags=encode_twstr("absolute inset-y-0 start-0 m-1 size-4 rounded-full bg-white transition-all peer-checked:start-6")
                                                )
                                    ]
                          )
@@ -19,21 +19,20 @@ def Simple(key, **kwargs):
 
 
 def Apple(key, **kwargs):
-    cbtn = oj.AC.CheckboxInput(key=key, checked=False,
+    cbtn = kv.AC.CheckboxInput(key=key, checked=False,
                                twsty_tags=encode_twstr("peer sr-only"),
                                **kwargs)
-    toggle = oj.PD.Label(twsty_tags=encode_twstr("relative h-8 w-14 cursor-pointer"), childs = [ cbtn, 
-    oj.PC.Span(twsty_tags=encode_twstr("absolute inset-0 rounded-full bg-gray-300 transition peer-checked:bg-blue-500")),
-oj.PC.Span(twsty_tags=encode_twstr("absolute inset-y-0 start-0 m-1 h-6 w-6 rounded-full bg-gray-500 ring-4px ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"))
+    toggle = kv.PD.Label(twsty_tags=encode_twstr("relative h-8 w-14 cursor-pointer"), childs = [ cbtn, 
+    kv.PC.Span(twsty_tags=encode_twstr("absolute inset-0 rounded-full bg-gray-300 transition peer-checked:bg-blue-500")),
+kv.PC.Span(twsty_tags=encode_twstr("absolute inset-y-0 start-0 m-1 h-6 w-6 rounded-full bg-gray-500 ring-4px ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"))
     ]
             )
-    return oj.PC.Div(childs=[toggle], classes="pt-8")
+    return kv.PC.Div(childs=[toggle], classes="pt-8")
 
 
-from html_writer.macro_module import macros, writer_ctx
 
 def Material(key, **kwargs):
-    with writer_ctx:
+    with MuCtx:
         with Div() as comp_box:
             with Label(for_='AcceptConditions', classes='relative h-8 w-12 cursor-pointer ', extra_classes="[-webkit-tap-highlight-color:_transparent]"):
                 with CheckboxInput(key=key,  id='AcceptConditions', classes='peer sr-only', **kwargs):
