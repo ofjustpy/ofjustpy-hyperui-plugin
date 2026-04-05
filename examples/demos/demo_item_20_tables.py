@@ -1,16 +1,15 @@
 from py_tailwind_utils import *
 
-import ofjustpy as oj
-oj.set_style("un")
+import kavya as kv
+kv.set_style("un")
 
-from ofjustpy import icons
 from py_tailwind_utils import *
-from ofjustpy import icons
+
 
 from hyperui_plugin.tables import  (Simple,
                                     SimpleWithBorder
-                                          )
-app = oj.load_app()
+                                    )
+app = kv.load_app()
 simple_table = Simple()
 
 # Add header
@@ -68,14 +67,14 @@ row3.add_cell("24/05/1995")
 row3.add_cell("Singer")
 row3.add_cell("$20,000")
 
-endpoint = oj.create_endpoint("demo_tables",
-                              childs = [oj.HCCMutable.Container(childs = [simple_table,
+endpoint = kv.create_endpoint("demo_tables",
+                              childs = [kv.PD.Container(childs = [simple_table,
                                                                           simpleWithBorder_table
                                                                           ],
                                                                 twsty_tags=[space/y/16]
                                                                 )
                                         ],
-                              title="Demo tables"
+                              title="Demo tables",
                               )
-oj.add_jproute("/", endpoint)
+kv.add_route("/", endpoint)
 
