@@ -484,3 +484,58 @@ tabs_box = kv.MD.StackV(key="Tabs",
                         twsty_tags=[space/y/8]
                         )
 # ================================ end ===============================
+# ============================= textareas ============================
+from hyperui_plugin.textareas import  (Simple,
+                                       ActionContained,
+                                       WithActions
+                                          )
+
+simple_ta = Simple("tbtn",
+                   "Order notes",
+                   "Enter any additional order notes...")
+
+actioncontained_ta = ActionContained("tbtn",
+                                     "Order notes",
+                   "Enter any additional order notes..."
+
+    )
+
+withaction_ta = WithActions("tawa",
+                            "Order notes",
+                   "Enter any additional order notes..."
+
+    )
+content = [simple_ta,
+           actioncontained_ta,
+           withaction_ta
+           ]
+
+textarea_box = kv.HS.StackV(key="Textarea",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================
+# ============================== toggles =============================
+from hyperui_plugin.toggles import  (Simple,
+                                     Apple,
+                                     Material,
+                                     #SimpleWithIcon
+                                          )
+
+simple_togglebtn = Simple(key="stbtn")
+apple_togglebtn = Apple(key="atbtn")
+material_togglebtn = Material(key="mtbtn")
+#simpleicon_togglebtn = SimpleWithIcon(key="sitbtn")
+
+content = [simple_togglebtn,
+           material_togglebtn,
+           apple_togglebtn,
+           #simpleicon_togglebtn
+           ]
+toggles_box = kv.MD.StackV(key="Toggles",
+                                      childs=content,
+                                      twsty_tags=[space/y/8]
+                                      )
+
+# ================================ end ===============================
+

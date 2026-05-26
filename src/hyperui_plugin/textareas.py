@@ -1,16 +1,13 @@
-import ofjustpy as oj
-from ofjustpy import icons
-from py_tailwind_utils.to_twsty_expr import encode_twstr
-from py_tailwind_utils import conc_twtags, tstr, pd, grow, bg, green, W, fc, gray, space, y
-
-from html_writer.macro_module import macros, writer_ctx
+import kavya as kv
+from kavya.dsl import macros, MuCtx
+from py_tailwind_utils import *
 
 def Simple(key, label, placeholder):
-    ta = oj.AC.Textarea(key=key, rows="4", placeholder=placeholder,
+    ta = kv.AC.Textarea(key=key, rows="4", placeholder=placeholder,
                    twsty_tags=encode_twstr("mt-2 w-full rounded-lg border-gray-200 align-top shadow-sm sm:text-sm"),
                    )
 
-    root = oj.PC.Div(childs=[oj.PC.Label(twsty_tags=encode_twstr("block text-sm font-medium text-gray-700"),
+    root = kv.PD.Div(childs=[kv.PD.Label(twsty_tags=encode_twstr("block text-sm font-medium text-gray-700"),
                                          text=label
                                          ),
                              ta
@@ -22,7 +19,7 @@ def Simple(key, label, placeholder):
 # TODO: there is a stray blue mid border
 # make clear functional
 def ActionContained(key, label, placeholder):
-    with writer_ctx:
+    with MuCtx:
         with Div() as comp_box:
             with Label(for_=f"for{key}", classes='sr-only', text=label):
                 pass
@@ -47,7 +44,7 @@ def ActionContained(key, label, placeholder):
                    
 def WithActions(key, label, placeholder):
     
-    with writer_ctx:
+    with MuCtx:
         with Div() as comp_box:
             with Label(for_=f'for_{key}', classes='sr-only', text=label):
                 pass
