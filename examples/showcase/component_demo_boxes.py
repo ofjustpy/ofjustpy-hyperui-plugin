@@ -349,3 +349,110 @@ sideMenu_box = kv.HS.StackV(key="SideMenu",
                                       )
 
 # ================================ end ===============================
+# =============================== stats ==============================
+from hyperui_plugin.stats import  (Simple,
+                                   IconStat,
+                                   SimpleWithStat
+                                   )
+
+stats_type_1 = Simple()
+stats_type_2 = IconStat()
+stats_type_3 = SimpleWithStat()
+content=[stats_type_1, stats_type_2, stats_type_3]
+stats_box = kv.HS.StackV(key="Stats",
+                                      childs=content,
+                                      twsty_tags=[space/y/8]
+                                      )
+# ================================ end ===============================
+# =============================== steps ==============================
+from hyperui_plugin.steps import  (WithTextAndIcon,
+                                   WithCheckIcons,
+                                   WithChevronTextIcon
+                                   
+                                   )
+
+steps_type_1, abtn = WithTextAndIcon("pg_1")
+steps_type_2 = WithCheckIcons("pg_2")
+steps_type_3 = WithChevronTextIcon()
+
+content=[kv.HM.Div(childs=[kv.HM.Halign(steps_type_1),
+                                   kv.PD.Halign(abtn)], twsty_tags=[space/y/4]),
+         kv.PD.Halign(steps_type_2),
+         kv.PD.Halign(steps_type_3)
+         ]
+steps_box = kv.MD.StackV(key="Steps",
+                                      childs=content,
+                                      twsty_tags=[space/y/8]
+                                      )
+
+# ================================ end ===============================
+
+# ============================== tables ==============================
+from hyperui_plugin.tables import  (Simple,
+                                    SimpleWithBorder
+                                          )
+simple_table = Simple()
+
+# Add header
+header = simple_table.add_header()
+header.add_cell("Name")
+header.add_cell("Date of Birth")
+header.add_cell("Role")
+header.add_cell("Salary")
+
+# Add rows
+row1 = simple_table.add_row()
+row1.add_cell("John Doe")
+row1.add_cell("24/05/1995")
+row1.add_cell("Web Developer")
+row1.add_cell("$120,000")
+
+row2 = simple_table.add_row()
+row2.add_cell("Jane Doe")
+row2.add_cell("04/11/1980")
+row2.add_cell("Web Designer")
+row2.add_cell("$100,000")
+
+row3 = simple_table.add_row()
+row3.add_cell("Gary Barlow")
+row3.add_cell("24/05/1995")
+row3.add_cell("Singer")
+row3.add_cell("$20,000")
+
+
+simpleWithBorder_table = SimpleWithBorder()
+
+# Add header
+header = simpleWithBorder_table.add_header()
+header.add_cell("Name")
+header.add_cell("Date of Birth")
+header.add_cell("Role")
+header.add_cell("Salary")
+
+# Add rows
+row1 = simpleWithBorder_table.add_row()
+row1.add_cell("John Doe")
+row1.add_cell("24/05/1995")
+row1.add_cell("Web Developer")
+row1.add_cell("$120,000")
+
+row2 = simpleWithBorder_table.add_row()
+row2.add_cell("Jane Doe")
+row2.add_cell("04/11/1980")
+row2.add_cell("Web Designer")
+row2.add_cell("$100,000")
+
+row3 = simpleWithBorder_table.add_row()
+row3.add_cell("Gary Barlow")
+row3.add_cell("24/05/1995")
+row3.add_cell("Singer")
+row3.add_cell("$20,000")
+
+content= [kv.PD.Halign(simple_table),
+          kv.PD.Halign(simpleWithBorder_table)
+          ]
+tables_box = kv.HS.StackV(key="Tables",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================

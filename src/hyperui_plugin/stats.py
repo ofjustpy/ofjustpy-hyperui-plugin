@@ -1,11 +1,13 @@
-import ofjustpy as oj
-from ofjustpy.icons import FontAwesomeIcon
-from html_writer.macro_module import macros, writer_ctx
+import kavya as kv
+from py_tailwind_utils.to_twsty_expr import encode_twstr
+from py_tailwind_utils import conc_twtags, tstr, pd, grow, bg, green, W, fc, gray
+from kavya.dsl import macros, MuCtx
+
 
 #TODO: make it a proper plugabble component: remove hardwiring of values.
 def Simple():
     
-    with writer_ctx:
+    with MuCtx:
         with Article(classes="flex flex-col gap-4 rounded-lg border border-gray-100 bg-white p-6") as comp_1:
 
             with Div(classes='inline-flex gap-2 self-end rounded bg-green-100 p-1 text-green-600') :
@@ -26,7 +28,7 @@ def Simple():
                     with Span(classes='text-xs text-gray-500', text='from $240.94'):
                         pass
 
-    with writer_ctx:
+    with MuCtx:
         with Article(classes="flex flex-col gap-4 rounded-lg border border-gray-100 bg-white p-6") as comp_2:
             with Div(classes='inline-flex gap-2 self-end rounded bg-red-100 p-1 text-red-600'):
                 with FontAwesomeIcon(label="faCircleQuestion"):
@@ -47,10 +49,10 @@ def Simple():
                         pass
 
 
-    return oj.PC.Div(childs=[comp_1, comp_2], classes="space-y-2")
+    return kv.PD.Div(childs=[comp_1, comp_2], classes="space-y-2")
 
 def IconStat():
-    with writer_ctx:
+    with MuCtx:
         with Article(classes='flex items-end justify-between rounded-lg border border-gray-100 bg-white p-6') as comp_1:
             with Div(classes='flex items-center gap-4'):
                 with Span(classes='hidden rounded-full bg-gray-100 p-2 text-gray-600 sm:block'):
@@ -72,7 +74,7 @@ def IconStat():
                 with Span(classes='text-xs font-medium', text='67.81%'):
                     pass
 
-    with writer_ctx:
+    with MuCtx:
         with Article(classes='flex items-end justify-between rounded-lg border border-gray-100 bg-white p-6') as comp_2:
             with Div(classes='flex items-center gap-4'):
                 with Span(classes='hidden rounded-full bg-gray-100 p-2 text-gray-600 sm:block'):
@@ -92,10 +94,10 @@ def IconStat():
                     pass
                 with Span(classes='text-xs font-medium', text='67.81%'):
                     pass
-    return oj.PC.Div(childs=[comp_1, comp_2], classes="space-y-2")
+    return kv.PD.Div(childs=[comp_1, comp_2], classes="space-y-2")
 
 def SimpleWithStat():
-    with writer_ctx:
+    with MuCtx:
         with Article(classes='flex items-end justify-between rounded-lg border border-gray-100 bg-white p-6')  as comp_1:
             with Div():
                 with P(classes='text-sm text-gray-500', text='Profit'):
@@ -112,7 +114,7 @@ def SimpleWithStat():
                 with Span(classes='text-xs font-medium', text='67.81%'):
                     pass
 
-    with writer_ctx:
+    with MuCtx:
         with Article(classes='flex items-end justify-between rounded-lg border border-gray-100 bg-white p-6') as comp_2:
             with Div():
                 with P(classes='text-sm text-gray-500', text='Profit'):
@@ -128,4 +130,4 @@ def SimpleWithStat():
 
                 with Span(classes='text-xs font-medium', text='67.81%'):
                     pass
-    return oj.PC.Div(childs=[comp_1, comp_2], classes="space-y-2")
+    return kv.PD.Div(childs=[comp_1, comp_2], classes="space-y-2")

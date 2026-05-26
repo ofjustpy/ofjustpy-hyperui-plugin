@@ -1,7 +1,7 @@
-import ofjustpy as oj
-from ofjustpy.icons import FontAwesomeIcon
-from html_writer.macro_module import macros, writer_ctx
-# TODO: make this mutable with next button
+import kavya as kv
+from kavya.dsl import macros, MuCtx
+from py_tailwind_utils.to_twsty_expr import encode_twstr
+from py_tailwind_utils import conc_twtags, tstr, pd, grow, bg, green, W, fc, gray, space, y
 from py_tailwind_utils import W, full
 
 # TODO: make adding steps as member function 
@@ -9,14 +9,14 @@ def WithTextAndIcon(key):
     """
 
     """
-    with writer_ctx:
-        with HCCMutable_Div() as comp_box:
+    with MuCtx:
+        with HM.Div() as comp_box:
             with H2(classes='sr-only', text='Steps'):
                 pass
 
-            with HCCMutable_Div():
-                with HCCMutable_Div(classes='overflow-hidden rounded-full bg-gray-200'):
-                    with Mutable_Div(key=key, classes='h-2 w-1/3 rounded-full bg-blue-500') as pb_comp:
+            with HM.Div():
+                with HM.Div(classes='overflow-hidden rounded-full bg-gray-200'):
+                    with MD.Div(key=key, classes='h-2 w-1/3 rounded-full bg-blue-500') as pb_comp:
                         pass
 
                 with Ol(classes='mt-4 grid grid-cols-3 text-sm space-x-8 font-medium text-gray-500'):
@@ -51,14 +51,14 @@ def WithTextAndIcon(key):
         cur_pos = (cur_pos + 1)%5
         print (cur_pos)
         
-    abtn = oj.AC.Button(key="abtn", text="Next Step",  on_click=on_next_step_click, classes="border border-gray-200 rounded-full text-sm")
+    abtn = kv.AC.Button(key="abtn", text="Next Step",  on_click=on_next_step_click, classes="border border-gray-200 rounded-full text-sm")
     return comp_box, abtn
 
 
 # TODO: incomplete -- unclear how to incorporate this
 # def WithDescription():
 
-#     with writer_ctx:
+#     with MuCtx:
 #         with Div():
 #             with H2(classes='sr-only', text='Steps'):
 #                 pass
@@ -96,11 +96,11 @@ def WithTextAndIcon(key):
 #                             with Path(stroke_linecap='round', stroke_linejoin='round', d='M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z'):
 #                                 pass
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 def WithCheckIcons(key):
     
-    with writer_ctx:
+    with MuCtx:
         with Div() as comp_box:
             with H2(classes='sr-only', text='Steps'):
                 pass
@@ -151,7 +151,7 @@ def WithCheckIcons(key):
     return comp_box
 
 def WithChevronTextIcon():
-    with writer_ctx:
+    with MuCtx:
         with Div() as comp_box:
             with H2(classes='sr-only', text='Steps'):
                 pass
