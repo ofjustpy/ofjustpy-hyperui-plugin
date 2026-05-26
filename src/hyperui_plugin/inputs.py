@@ -1,12 +1,13 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
+
+
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import conc_twtags, tstr, pd, grow
 
-from html_writer.macro_module import macros, writer_ctx
 
 def Simple(key, label, placeholder):
-    with writer_ctx:
+    with MuCtx:
         with Div() as email_input_container:
             with Label(for_=f'{key}_UserEmail', classes='block text-xs font-medium text-gray-700', text=label):
                 pass
@@ -34,7 +35,7 @@ def Simple(key, label, placeholder):
 
 
 def WithIcon(key, label, placeholder):
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='relative') as comp_box:
             with Label(for_='UserEmail', classes='sr-only', text=label):
                 pass
@@ -62,7 +63,7 @@ def WithIcon(key, label, placeholder):
 #     pass
 
 def SearchInputWithButton(key, label, placeholder):
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='relative') as comp_box:
             with Label(for_='Search', classes='sr-only', text=label):
                 pass
@@ -104,7 +105,7 @@ def SearchInputWithButton(key, label, placeholder):
 
 
 def WithLabel(key, label, placeholder):
-    with writer_ctx:
+    with MuCtx:
         with Label(for_='UserEmail', classes='block overflow-hidden rounded-md border border-gray-200 px-3 py-2 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600') as comp_box:
             with Span(classes='text-xs font-medium text-gray-700', text=label):
                 pass
@@ -124,7 +125,7 @@ def WithLabel(key, label, placeholder):
 
 
 def FloatingLabel(key, label, placeholder):
-    with writer_ctx:
+    with MuCtx:
         with Label(for_='Username', classes='relative block rounded-md border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600') as comp_box:
             # placeholder-transparent removed
             #. TODO: use tailwind v3/v4 placeholder:
@@ -147,7 +148,7 @@ def FloatingLabel(key, label, placeholder):
 
 
 def FloatingLabelInside(key, label, placeholder):
-    with writer_ctx:
+    with MuCtx:
         with Label(for_='UserEmail', classes='relative block overflow-hidden rounded-md border border-gray-200 px-3 pt-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600') as comp_box:
             # removed placeholder-transparent
             # TODO: 
@@ -168,7 +169,7 @@ def FloatingLabelInside(key, label, placeholder):
 
 
 def FloatingLabelUnderline(key, label, placeholder):
-    with writer_ctx:
+    with MuCtx:
         with Label(for_='UserEmail', classes='relative block overflow-hidden border-b border-gray-200 bg-transparent pt-3 focus-within:border-blue-600') as comp_box:
             # placeholder-transparent
             with TextInput(type='email', key=key, placeholder=placeholder, classes='peer h-8 w-full border-none bg-transparent p-0  focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm'):

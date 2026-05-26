@@ -1,9 +1,9 @@
 
-import ofjustpy as oj
-from html_writer.macro_module import macros, writer_ctx
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 
 def More(text=''):
-    with writer_ctx:
+    with MuCtx:
         with Span(classes='flex items-center grow') as separator_span:
             with Span(classes='h-px flex-1 bg-black'):
                 pass
@@ -20,7 +20,7 @@ def More(text=''):
 
 
 def Blurry(text=''):
-    with writer_ctx:
+    with MuCtx:
         with Span(classes='relative flex justify-center grow') as container_span:
             with Div(classes='absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-transparent bg-gradient-to-r from-transparent via-gray-500 to-transparent opacity-75'):
                 pass
@@ -32,7 +32,7 @@ def Blurry(text=''):
 
 
 def AlignLeft(text=''):
-    with writer_ctx:
+    with MuCtx:
         with Span(classes='flex items-center grow') as separator_span:
             with Span(classes='pr-6', text=f'{text}'):
                 pass
@@ -42,10 +42,9 @@ def AlignLeft(text=''):
 
     return separator_span
 
-from html_writer.macro_module import macros, writer_ctx
 
 def AlignRight(text=''):
-    with writer_ctx:
+    with MuCtx:
         with Span(classes='flex items-center grow') as separator_span:
             with Span(classes='h-px flex-1 bg-black'):
                 pass

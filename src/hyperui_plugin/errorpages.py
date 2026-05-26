@@ -1,8 +1,8 @@
-from html_writer.macro_module import macros, writer_ctx
-import ofjustpy as oj
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 
 def NotFoundPage():
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='grid h-screen place-content-center bg-white px-4') as container_div:
             with H1(classes='uppercase tracking-widest text-gray-500', text='404 | Not Found'):
                 pass
@@ -11,7 +11,7 @@ def NotFoundPage():
 
 
 def Error404Page(href="#"):
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='grid h-screen place-content-center bg-white px-4') as container_div:
             with Div(classes='text-center') as content_div:
                 with H1(classes='text-9xl font-black text-gray-200', text='404'):
@@ -31,7 +31,7 @@ def Error404Page(href="#"):
 
 
 def NotFoundPageWithImage(img_src = 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1548&q=80'):
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='flex h-screen flex-col bg-white') as container_div:
             with Img(src=img_src, alt='', classes='h-64 w-full object-cover'):
                 pass

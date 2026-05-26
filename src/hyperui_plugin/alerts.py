@@ -1,13 +1,14 @@
 import kavya as kv
-from html_writer.macro_module import macros, writer_ctx
+from kavya.dsl import macros, MuCtx
+
 
 def Popup(key, title='', desc=''):
-    with writer_ctx:
+    with MuCtx:
         with Div(role='alert', classes='rounded-xl border border-gray-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900') as comp_box:
             with Div(classes='flex items-start gap-4'):
                 with Span(classes='text-green-500'):
                     with FontAwesomeIcon(
-                                 label="faCircleCheck", size="1x", 
+                            label="faCircleCheck", size="1x", 
                                  fixedWidth=True,
                             fa_group="regular",
                             classes="w-5 h-5",
@@ -43,7 +44,7 @@ def Popup(key, title='', desc=''):
 
 
 def PopupWithAction(key, title='', desc=''):
-    with writer_ctx:
+    with MuCtx:
         with Div(role='alert', classes='rounded-xl border border-gray-100 bg-white p-4 dark:border-gray-800 dark:bg-gray-900') as comp_box:
             with Div(classes='flex items-start gap-4'):
                 with Span(classes='text-green-600'):
@@ -98,7 +99,7 @@ def PopupWithAction(key, title='', desc=''):
     return comp_box
 
 def Content(title='', content=''):
-    with writer_ctx:
+    with MuCtx:
         with Div(role='alert', classes='rounded border-s-4 border-red-500 bg-red-100 p-4') as alert_div:
 
             with Strong(classes='block font-medium text-red-800', text=title):
@@ -110,11 +111,11 @@ def Content(title='', content=''):
     return alert_div
 
 def WarningContent(title='', content='', **kwargs):
-    with writer_ctx:
+    with MuCtx:
         with Div(role='alert', classes='rounded border-s-4 border-red-500 bg-red-50 p-4') as alert_div:
 
             with Div(classes="flex items-center gap-2 text-red-800"):
-                with LucideIcon(label="eyeoff"
+                with LucideIcon(label="eye-off"
 
                         ):
                 # with FontAwesomeIcon(
