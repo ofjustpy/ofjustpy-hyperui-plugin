@@ -13,7 +13,8 @@ from component_demo_boxes import (alert_box,
                                   loginforms_box,
                                   mediaalerts_box,
                                   pagination_box,
-                                  selects_box
+                                  selects_box,
+                                  sideMenu_box 
                                         )
 from hyperui_plugin.sideMenu import  (Simple as SimpleSideMenu,
                                       )
@@ -33,7 +34,8 @@ endpoint = kv.create_endpoint("hyperui_component_ui_library",
                                                                   loginforms_box,
                                                                   mediaalerts_box,
                                                                   pagination_box,
-                                                                  selects_box
+                                                                  selects_box,
+                                                                  sideMenu_box 
                                                                   ],
                                                           twsty_tags=[mr/x/auto]
                                                           )
