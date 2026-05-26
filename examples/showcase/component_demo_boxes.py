@@ -456,3 +456,31 @@ tables_box = kv.HS.StackV(key="Tables",
                                  twsty_tags=[space/y/8]
                                  )
 # ================================ end ===============================
+
+# =============================== tabs ===============================
+from hyperui_plugin.tabs import  (Pills,
+                                  Tabbed
+                                          )
+def on_change(dbref, msg, to_ms):
+
+    pass
+
+pills = Pills("pillstab")
+pills.add_tab("settings", "Settings")
+pills.add_tab("messages", "Messages")
+pills.add_tab("archive", "Archive")
+pills.add_tab("notifications", "Notifications", selected=True)
+
+tabbed = Tabbed("tabbed")
+tabbed.add_tab("settings", "Settings")
+tabbed.add_tab("messages", "Messages")
+tabbed.add_tab("archive", "Archive")
+tabbed.add_tab("notifications", "Notifications", selected=True)
+
+content=[pills, tabbed]
+# Tabs are mutable -- eventullay
+tabs_box = kv.MD.StackV(key="Tabs",
+                        childs=content,
+                        twsty_tags=[space/y/8]
+                        )
+# ================================ end ===============================

@@ -17,7 +17,8 @@ from component_demo_boxes import (alert_box,
                                   sideMenu_box,
                                   stats_box,
                                   steps_box,
-                                  tables_box
+                                  tables_box,
+                                  tabs_box
                                         )
 from hyperui_plugin.sideMenu import  (Simple as SimpleSideMenu,
                                       )
@@ -41,7 +42,8 @@ endpoint = kv.create_endpoint("hyperui_component_ui_library",
                                                                   sideMenu_box,
                                                                   stats_box,
                                                                   steps_box,
-                                                                  tables_box
+                                                                  tables_box,
+                                                                  tabs_box
                                                                   ],
                                                           twsty_tags=[mr/x/auto]
                                                           )
