@@ -69,7 +69,7 @@ def Datalist(key, title):
                     with FontAwesomeIcon(label="faCircleQuestion"): 
                         pass
                     pass
-            with Datalist(name="HeadlineAct", key=f"dl_{key}") as dl_box:
+            with PD.Datalist(name="HeadlineAct", key=f"dl_{key}") as dl_box:
                 pass
                 
     def add_option(value, text, dl_box=dl_box):

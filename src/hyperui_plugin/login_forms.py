@@ -1,8 +1,9 @@
-from html_writer.macro_module import macros, writer_ctx
-import ofjustpy as oj
-from ofjustpy.icons import FontAwesomeIcon
+import kavya as kv
+from kavya.dsl import macros, MuCtx
+
+
 def SplitWithGraphic(key):
-    with writer_ctx:
+    with MuCtx:
         with Section(classes='bg-white') as comp_box:
             with Div(classes='lg:grid lg:min-h-screen lg:grid-cols-12'):
                 with Aside(classes='relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6'):
@@ -99,7 +100,7 @@ def SplitWithGraphic(key):
 #TODO: argumentize the func; use proper key for TextInputs
 # for now copy and inline modify 
 def SplitWithContent():
-    with writer_ctx:
+    with MuCtx:
         with Section(classes='bg-white') as comp_box:
             with Div(classes='lg:grid lg:min-h-screen lg:grid-cols-12'):
                 with Section(classes='relative flex h-32 items-end bg-gray-900 lg:col-span-5 lg:h-full xl:col-span-6'):

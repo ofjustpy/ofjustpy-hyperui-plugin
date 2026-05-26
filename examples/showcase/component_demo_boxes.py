@@ -207,3 +207,114 @@ content = [kv.PD.Halign(ainp),
 inputs_box = kv.HS.StackV(key="Inputs", childs=content, twsty_tags=[space/y/4])
 # ================================ end ===============================
 
+# ============================ login forms ===========================
+
+from hyperui_plugin.login_forms import  (SplitWithGraphic,
+                                         SplitWithContent
+                                         )
+
+
+login_form_type1 = SplitWithGraphic("login_form")
+login_form_type2 = SplitWithContent()
+content=[kv.PD.Halign(login_form_type1),
+         kv.PD.Halign(login_form_type2),
+         ]
+loginforms_box = kv.HS.StackV(key="LoginForms", childs=content, twsty_tags=[space/y/4])
+# ================================ end ===============================
+
+# =========================== media alerts ===========================
+from hyperui_plugin.media_alert import  (card)
+def cards():
+    for _ in ["top", "center", "bottom", "stretch"]:
+        yield card(title="Title goes here",
+                    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates voluptas distinctio nesciunt quas non animi.",
+                    img_src = "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+             align=_
+                    )
+
+        yield card(title="Title goes here",
+                    text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates voluptas distinctio nesciunt quas non animi.",
+                    img_src = "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2680&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+             align=f"{_}-right"
+                    )
+content=[kv.PD.Halign(_) for _ in cards()]
+mediaalerts_box = kv.HS.StackV(key="MediaAlerts",
+                                      childs=content,
+                                      twsty_tags=[space/y/8]
+                                      )
+# ================================ end ===============================
+
+# ============================ pagination ============================
+from hyperui_plugin.pagination import  (WithButtons, WithInput, BackgroundWithInput, WithFraction)
+pg_nav_buttons = WithButtons("pagination_nav_bar", [4, 5, 6, 8])
+
+pg_nav_input = WithInput("pagination_nav_input")
+
+pg_nav_bginput = BackgroundWithInput("pagination_nav_bginput")
+
+pg_nav_fraction = WithFraction("pagination_nav_fraction")
+content = [kv.PD.Halign(pg_nav_buttons),
+           kv.PD.Halign(pg_nav_input),
+           kv.PD.Halign(pg_nav_bginput),
+           kv.PD.Halign(pg_nav_fraction)
+           ]
+
+pagination_box = kv.HS.StackV(key="Pagination",
+                                      childs=content,
+                                      twsty_tags=[space/y/8]
+                                      )
+# ================================ end ===============================
+# ============================== selects =============================
+from hyperui_plugin.selects import  (Base, BaseGroup, Datalist)
+
+base_select = Base("base", "Headline")
+base_select.add_option("JM", "John Mayer")
+base_select.add_option("SRV", "Stevie Ray Vaughn")
+base_select.add_option("JH", "Jimi Hendrix")
+base_select.add_option("BBK", "B.B King")
+base_select.add_option("AK", "Albert King")
+base_select.add_option("BG", "Buddy Guy")
+base_select.add_option("EC", "Eric Clapton")
+
+
+basegroup_select = BaseGroup("basegroup", "Headline")
+optgroup = basegroup_select.add_optgroup("A")
+optgroup.add_option("AK", "Albert King")
+
+optgroup = basegroup_select.add_optgroup("B")
+optgroup.add_option("BBK", "B.B King")
+optgroup.add_option("BG", "Buddy Guy")
+
+
+optgroup = basegroup_select.add_optgroup("E")
+optgroup.add_option("EC", "Eric Clapton")
+
+
+optgroup = basegroup_select.add_optgroup("J")
+optgroup.add_option("JM", "John Mayer")
+optgroup.add_option("JH", "Jimi Hendrix")
+
+optgroup = basegroup_select.add_optgroup("S")
+optgroup.add_option("SRV", "Stevie Ray Vaughn")
+
+
+datalist_select = Datalist("base", "Headline")
+datalist_select.add_option("JM", "John Mayer")
+datalist_select.add_option("SRV", "Stevie Ray Vaughn")
+datalist_select.add_option("JH", "Jimi Hendrix")
+datalist_select.add_option("BBK", "B.B King")
+datalist_select.add_option("AK", "Albert King")
+datalist_select.add_option("BG", "Buddy Guy")
+datalist_select.add_option("EC", "Eric Clapton")
+
+
+
+content = [base_select,
+                                                                        basegroup_select,
+                                                                        datalist_select
+                                                                        ]
+selects_box = kv.HS.StackV(key="Selects",
+                                      childs=content,
+                                      twsty_tags=[space/y/8]
+                                      )
+# ================================ end ===============================

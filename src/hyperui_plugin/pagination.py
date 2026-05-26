@@ -1,12 +1,12 @@
-import ofjustpy as oj
-from ofjustpy.icons import FontAwesomeIcon
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import conc_twtags, tstr, pd, grow
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 def WithButtons(key, page_numbers, href_begin="#", href_end="#"):
-    with writer_ctx:
+    with MuCtx:
         with Ol(classes='flex justify-center gap-1 text-xs font-medium') as comp_box:
             with Li():
                 with A(key=f"begin_{key}", href=href_begin, classes='inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180'):
@@ -18,14 +18,14 @@ def WithButtons(key, page_numbers, href_begin="#", href_end="#"):
 
 
     for i in page_numbers:
-        with writer_ctx:
+        with MuCtx:
             with Li() as li_item:
                 with A(key=f"pn_{i}_{key}", href='#', classes='block h-8 w-8 rounded border border-gray-100 bg-white text-center leading-8 text-gray-900', text=str(i)) as item_box:
                     pass
         comp_box.components.append(li_item)
         
 
-    with writer_ctx:
+    with MuCtx:
         with Li() as li_item:
             with A(key=f"last_{key}", classes="inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180", href=href_end):
                 with Span(classes="sr-only", text="Next Page"):
@@ -39,7 +39,7 @@ def WithButtons(key, page_numbers, href_begin="#", href_end="#"):
 
 
 def WithInput(key):
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='inline-flex justify-center gap-1') as comp_box:
             with A(href='#', classes='inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180', key=f"pno_prev_{key}"):
                 with Span(classes='sr-only', text='Prev Page'):
@@ -67,7 +67,7 @@ def WithInput(key):
 
 def BackgroundWithInput(key):
     # attrs={'aria-hidden': 'true'}c
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='inline-flex items-center justify-center rounded bg-blue-600 py-1 text-white') as comp_box:
             with A(href='#', classes='inline-flex h-8 w-8 items-center justify-center rtl:rotate-180'):
                 with Span(classes='sr-only', text='Prev Page'):
@@ -99,7 +99,7 @@ def BackgroundWithInput(key):
     return comp_box
 
 def WithFraction(key):
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='inline-flex items-center justify-center gap-3') as comp_box:
             with A(href='#', classes='inline-flex h-8 w-8 items-center justify-center rounded border border-gray-100 bg-white text-gray-900 rtl:rotate-180'):
                 with Span(classes='sr-only', text='Next Page'):

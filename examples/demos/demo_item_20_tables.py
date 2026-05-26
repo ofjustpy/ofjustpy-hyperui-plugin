@@ -69,8 +69,8 @@ row3.add_cell("$20,000")
 
 endpoint = kv.create_endpoint("demo_tables",
                               childs = [kv.PD.Container(childs = [simple_table,
-                                                                          simpleWithBorder_table
-                                                                          ],
+                                                                  #simpleWithBorder_table
+                                                                  ],
                                                                 twsty_tags=[space/y/16]
                                                                 )
                                         ],
