@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,10 +17,10 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 def CenteredWithAction(title, sub_title, description, button1_text, button1_link, button2_text, button2_link):
-    with writer_ctx:
+    with MuCtx:
         with Section(classes="bg-gray-50") as comp_box:
             with Div(classes="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center"):
                 with Div(classes="mx-auto max-w-xl text-center"):
@@ -40,7 +40,7 @@ def CenteredWithAction(title, sub_title, description, button1_text, button1_link
     return comp_box
 
 def CenteredWithActionGradient(title, sub_title, description, button1_text, button1_link, button2_text, button2_link):
-    with writer_ctx:
+    with MuCtx:
         with Section(classes="bg-gray-900 text-white") as comp_box:
             with Div(classes="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center"):
                 with Div(classes="mx-auto max-w-3xl text-center"):

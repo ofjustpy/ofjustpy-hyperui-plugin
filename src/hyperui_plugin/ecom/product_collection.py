@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,7 +17,7 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 def Simple (title, desc, align_desc = "left"):
     """
@@ -26,7 +26,7 @@ def Simple (title, desc, align_desc = "left"):
     desc_align_twsty = ""
     if align_desc == "center":
         desc_align_twsty = "mx-auto"
-    with writer_ctx:
+    with MuCtx:
         with Section() as comp_box:
             with Div(classes="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8"):
                 with Header():
@@ -36,12 +36,12 @@ def Simple (title, desc, align_desc = "left"):
                     with P(classes=f"{desc_align_twsty} mt-4 max-w-md text-gray-500", text=desc):
                         pass
 
-                with Ul(classes="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4") as item_container:
+                with PD.Ul(classes="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4") as item_container:
                     pass
 
     def add_product(img_src, product_name, regular_price, item_container=item_container):
         
-        with writer_ctx:
+        with MuCtx:
             with Li() as item_box:
                 with A(href="#", classes="group block overflow-hidden"):
                     with Img(src=img_src, alt="", classes="h-80 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-96"):
@@ -70,7 +70,7 @@ def Simple (title, desc, align_desc = "left"):
     
 #     """
 #     # Availability details
-#     with writer_ctx:
+#     with MuCtx:
 #         with Details(classes='overflow-hidden rounded border border-gray-300', extra_classes="[&_summary::-webkit-details-marker]:hidden"):
 #             with Summary(classes='flex cursor-pointer items-center justify-between gap-2 p-4 text-gray-900 transition'):
 #                 with Span(classes='text-sm font-medium', text=label):
@@ -95,7 +95,7 @@ def Simple (title, desc, align_desc = "left"):
 #         """
 #         Checkbox showing filter clause
 #         """
-#         with writer_ctx:
+#         with MuCtx:
 #             with Li() as filter_clause_box:
 #                 with Label(for_='FilterOutOfStock', classes='inline-flex items-center gap-2'):
 #                     with CheckboxInput(key=key, classes='h-5 w-5 rounded border-gray-300'):

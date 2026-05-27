@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,11 +17,11 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 
 def Card_Type_1(href, title, author, image_src, content, published_date, reading_time):
-    with writer_ctx:
+    with MuCtx:
         with A(href=href, classes="relative block overflow-hidden rounded-lg border border-gray-100 p-4 sm:p-6 lg:p-8") as comp_box:
             with Span(classes="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"):
                 pass

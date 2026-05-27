@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,9 +17,9 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 def WithProducts(section_title, section_desc, btn_text, href="", ):
-    with writer_ctx:
+    with MuCtx:
         with Section() as root_comp:
             with Div(classes="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8"):
                 with StackG(classes="gap-4 lg:grid-cols-3 lg:items-stretch", num_cols=1):
@@ -33,7 +33,7 @@ def WithProducts(section_title, section_desc, btn_text, href="", ):
                             with A(href="#", classes="mt-8 inline-block rounded border border-gray-900 bg-gray-900 px-12 py-3 text-sm font-medium text-white transition hover:shadow focus:outline-none focus:ring", text=btn_text):
                                 pass
                     with Div(classes="lg:col-span-2 lg:py-8"):
-                        with Ul(classes="grid grid-cols-2 gap-4") as display_box:
+                        with PD.Ul(classes="grid grid-cols-2 gap-4") as display_box:
 
                             pass
                         pass
@@ -42,7 +42,7 @@ def WithProducts(section_title, section_desc, btn_text, href="", ):
             pass
         pass
     def add_product(img_src, title, desc, display_box=display_box):
-        with writer_ctx:
+        with MuCtx:
             with Li() as product_comp:
                 with A(href="#", classes="group block"):
                     with Img(src=img_src):
@@ -60,7 +60,7 @@ def WithProducts(section_title, section_desc, btn_text, href="", ):
 
 
 def CollectionGrid(collection_title, collection_desc):
-    with writer_ctx:
+    with MuCtx:
         with Section() as root_comp:
             with Div("mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8"):
                 with Header(classes="text-center"):
@@ -69,13 +69,13 @@ def CollectionGrid(collection_title, collection_desc):
                     with P(classes="mx-auto mt-4 max-w-md text-gray-500", text=collection_desc):
                         pass
 
-                with Ul(classes="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3") as display_box:
+                with PD.Ul(classes="mt-8 grid grid-cols-1 gap-4 lg:grid-cols-3") as display_box:
                     pass
                 pass
             pass
 
     def add_product(img_src, desc, btn_desc, display_box=display_box):
-        with writer_ctx:
+        with MuCtx:
             with Li() as item_box:
                 with A(href="#", classes="group relative block"):
                     with Img(src=img_src):

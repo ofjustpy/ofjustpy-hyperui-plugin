@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,11 +17,11 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 
 def GridUSP():
-    with writer_ctx:
+    with MuCtx:
         with Section(classes='bg-gray-900 text-white') as comp_box:
             with Div(classes='max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16'):
                 with Div(classes='max-w-xl'):

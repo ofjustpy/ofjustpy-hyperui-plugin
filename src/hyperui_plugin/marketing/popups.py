@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,10 +17,9 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
 
 def SplitWithImageAndAction(img_src, top_top, top_mid, top_bottom,  link_text, footer_text):
-    with writer_ctx:
+    with MuCtx:
         with Section(classes="overflow-hidden rounded-lg shadow-2xl md:grid md:grid-cols-3") as comp_box:
             with Img(
                 alt="Trainer",
@@ -57,7 +56,7 @@ def MessageNotificationsAndAction(message_title,
                                   message_desc,
                                   action_btn_text1,
                                   action_btn_text2):
-    with writer_ctx:
+    with MuCtx:
         with Div(classes="rounded-2xl border border-blue-100 bg-white p-4 shadow-lg sm:p-6 lg:p-8", role="alert") as comp_box:
             with Div(classes="flex items-center gap-4"):
                 with Span(classes="shrink-0 rounded-full bg-blue-400 p-2 text-white"):
@@ -83,7 +82,7 @@ def MessageNotificationsAndAction(message_title,
 
 
 def OrderNotificationsWithAction():
-    with writer_ctx:
+    with MuCtx:
         with Section(classes="rounded-3xl shadow-2xl") as comp_box:
             with Div(classes="p-8 text-center sm:p-12"):
                 with P(classes="text-sm font-semibold uppercase tracking-widest text-pink-500", text="Your order is on the way"):
@@ -99,7 +98,7 @@ def OrderNotificationsWithAction():
     return comp_box
 
 def ContactActions():
-    with writer_ctx:
+    with MuCtx:
         with Div(classes="rounded-lg border border-gray-100 text-center shadow-xl") as comp_box:
             with Div(classes="px-6 py-5"):
                 with P(classes="font-medium", text="Not found your answer?"):
@@ -146,7 +145,7 @@ def ContactActions():
     return comp_box
 
 def NotificationWithImageAndClose(key):
-    with writer_ctx:
+    with MuCtx:
         with Div(classes="relative rounded-lg border border-gray-200 shadow-lg") as comp_box:
             with Button(key=key, classes="absolute -end-1 -top-1 rounded-full border border-gray-300 bg-gray-100 p-1"):
                 with Span(classes="sr-only", text="Close"):
@@ -169,7 +168,7 @@ def NotificationWithImageAndClose(key):
 
 def FloatingSplitWithImageContentClose(key):
     
-    with writer_ctx:
+    with MuCtx:
         with Div(classes="fixed inset-x-0 bottom-0 p-4") as comp_box:
             with Div(classes="relative max-w-xl rounded-lg bg-gray-100 p-6 shadow-sm"):
                 with Button(key=key, classes="absolute -end-1 -top-1 rounded-full border border-gray-200 bg-white p-1 text-gray-400"):
@@ -194,7 +193,7 @@ def FloatingSplitWithImageContentClose(key):
 
 def FloatingWithClose(key):
     
-    with writer_ctx:
+    with MuCtx:
         with Aside(classes="fixed bottom-4 end-4 z-50 flex items-center justify-center gap-4 rounded-lg bg-black px-5 py-3 text-white") as comp_box:
             with A(href="/new-thing", target="_blank", rel="noreferrer", classes="text-sm font-medium hover:opacity-75", text="Hey! Come Check This Out 👋"):
                 pass

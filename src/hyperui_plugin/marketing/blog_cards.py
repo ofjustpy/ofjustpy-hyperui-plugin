@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,13 +17,13 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 
 # TODO: unfold the mystery width in hyper ui display
 # for now using max-w-xl
 def Simple(image_url, date, title, content, link):
-    with writer_ctx:
+    with MuCtx:
         with Article(classes="max-w-xl overflow-hidden rounded-lg shadow transition hover:shadow-lg") as comp_box:
             with Img(src=image_url, alt="Office", classes="h-56 w-full object-cover"):
                 pass
@@ -43,7 +43,7 @@ def Simple(image_url, date, title, content, link):
 
 def Floating(image_url, alt_text, title, content, link):
     
-    with writer_ctx:
+    with MuCtx:
         with Article(classes="group max-w-xl") as comp_box:
             with Img(src=image_url, alt=alt_text, classes="h-56 w-full rounded-xl object-cover shadow-xl transition "):
                 pass
@@ -59,7 +59,7 @@ def Floating(image_url, alt_text, title, content, link):
     return comp_box
 
 def Bordered(image_url, alt_text, title, content, link):
-    with writer_ctx:
+    with MuCtx:
         with Article(classes="max-w-xl overflow-hidden rounded-lg border border-gray-100 bg-white shadow-sm") as comp_box:
             with Img(src=image_url, alt=alt_text, classes="h-56 w-full object-cover"):
                 pass
@@ -81,7 +81,7 @@ def Bordered(image_url, alt_text, title, content, link):
 
 
 def GradientBorder(date, title, tags):
-    with writer_ctx:
+    with MuCtx:
         with Article(classes="max-w-xl  rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 p-0.5 shadow-xl transition  hover:shadow-sm ",
                      extra_classes="hover:animate-background"
                      ) as comp_box:

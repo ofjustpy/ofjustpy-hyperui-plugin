@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,11 +17,11 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 
 def ContentAndImage():
-    with writer_ctx:
+    with MuCtx:
         with Section(classes='overflow-hidden bg-gray-50 sm:grid sm:grid-cols-2') as comp_box:
             # Left Content
             with Div(classes='p-8 md:p-12 lg:px-16 lg:py-24'):
@@ -49,7 +49,7 @@ def ContentAndImage():
 
 
 def NewsletterSignup():
-    with writer_ctx:
+    with MuCtx:
         with Section(classes='bg-gray-50') as comp_box:
             with Div(classes='p-8 md:p-12 lg:px-16 lg:py-24'):
                 # Text Content

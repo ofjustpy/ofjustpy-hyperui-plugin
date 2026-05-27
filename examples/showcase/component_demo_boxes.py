@@ -5,9 +5,9 @@ from py_tailwind_utils import *
 
 # ======================== Expression helpers ========================
 class LMapInitiator:
+    def __init__(self) -> None:
+        pass
     def __or__(self, iterable):
-        # Spawns a temporary runner for this specific operation.
-        # 'LMap' itself stays completely untouched and clean.
         return LMapRunner(iterable)
 
 class LMapRunner:
@@ -15,20 +15,64 @@ class LMapRunner:
         self.iterable = iterable
 
     def __or__(self, func):
+        # let the terminal func handle the self.iterable
+        if hasattr(func, '__ror__'):
+            return func.__ror__(self.iterable)
+        
         if not callable(func):
-            raise TypeError("The final item in the LMap chain must be a callable function.")
+            raise TypeError("The next item in the LMap chain must be a callable function.")
         
-        # 1. Compute the result
-        result = [func(item) for item in self.iterable]
+        # Update the internal iterable in-place with a lazy generator
+        self.iterable = (func(item) for item in self.iterable)
         
-        # 2. Explicitly break references to the input data to free memory immediately
-        self.iterable = None 
+        # Return the EXACT SAME instance
+        return self
+
+    def __iter__(self):
+        # Yield items out one by one when iterated
+        for item in self.iterable:
+            yield item
         
-        # 3. Return the native list
-        return result
+        # Break reference immediately after exhaustion to free memory
+        self.iterable = None
+
+LMap = LMapInitiator()
+
+class ToList:
+    @classmethod
+    def __ror__(cls, other):
+        # 'other' will be the LMapRunner instance passed from the left
+        return list(other)
+    
+
+
+
+
+# class LMapInitiator:
+#     def __or__(self, iterable):
+#         # Spawns a temporary runner for this specific operation.
+#         # 'LMap' itself stays completely untouched and clean.
+#         return LMapRunner(iterable)
+
+# class LMapRunner:
+#     def __init__(self, iterable):
+#         self.iterable = iterable
+
+#     def __or__(self, func):
+#         if not callable(func):
+#             raise TypeError("The final item in the LMap chain must be a callable function.")
+        
+#         # 1. Compute the result
+#         result = [func(item) for item in self.iterable]
+        
+#         # 2. Explicitly break references to the input data to free memory immediately
+#         self.iterable = None 
+        
+#         # 3. Return the native list
+#         return result
 
 # The single global instance
-LMap = LMapInitiator()
+
 
 
 
@@ -574,7 +618,7 @@ content = LMap | [ simple_togglebtn,
                      material_togglebtn,
                      apple_togglebtn
 
-                    ] | kv.PD.Halign
+                    ] | kv.PD.Halign  | ToList
 toggles_box = kv.MD.StackV(key="Toggles",
                                       childs=content,
                                       twsty_tags=[space/y/8]
@@ -638,7 +682,7 @@ content = LMap | [ container,
                    mg_container,
                    splitWithHeading
 
-                    ] | kv.PD.Halign
+                    ] | kv.PD.Halign | ToList
 
 
 verticalmenu_box = kv.HS.StackV(key="VerticalMenu",
@@ -695,7 +739,7 @@ popup_cart.add_item(img_src="https://images.unsplash.com/photo-1618354691373-d85
 content = LMap | [ popup_cart,
                    Contained()
 
-                    ] | kv.PD.Halign
+                    ] | kv.PD.Halign | ToList
 
 ecomcarts_box = kv.HS.StackV(key="EcomCarts",
                              childs=content,
@@ -713,9 +757,437 @@ cf_2 = StackedDropdown()
 content = LMap | [ cf_1, 
                    cf_2
 
-                    ] | kv.PD.Halign 
+                    ] | kv.PD.Halign | ToList
 ecomcollectionfilters_box = kv.HS.StackV(key="EcomCollectionFilters",
                                  childs=content,
                                  twsty_tags=[space/y/8]
                                  )
 # ================================ end ===============================
+
+# ========================= featuredsections =========================
+from hyperui_plugin.ecom.featured_sections import  (WithProducts,
+                                                    CollectionGrid
+                                          )
+
+collection_with_products = WithProducts("Watches", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas rerum quam amet provident nulla error!", "Shop All", )
+
+collection_with_products.add_product("https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1598&q=80", "Simple Watch", "$150")
+
+collection_with_products.add_product("https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1598&q=80", "Simple Watch", "$150")
+
+collection_with_products.add_product("https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1598&q=80", "Simple Watch", "$150")
+
+
+collection_grid = CollectionGrid("New Collection", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque praesentium cumque iure dicta incidunt est ipsam, officia dolor fugit natus?")
+collection_grid.add_product("https://images.unsplash.com/photo-1618898909019-010e4e234c55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+                            
+                            "Casual Trainers",
+                            "Shop Now")
+collection_grid.add_product("https://images.unsplash.com/photo-1618898909019-010e4e234c55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+                            
+                            "Casual Trainers",
+                            "Shop Now")
+
+collection_grid.add_product("https://images.unsplash.com/photo-1618898909019-010e4e234c55?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
+                            
+                            "Casual Trainers",
+                            "Shop Now")
+
+content = LMap | [collection_with_products,
+                                        collection_grid
+                                        ] | kv.PD.Halign | ToList
+
+ecomfeaturedsections_box = kv.HS.StackV(key="EconFeaturedSections",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================
+
+# =========================== product cards ==========================
+from hyperui_plugin.ecom.product_cards import  (Simple,
+                                                WithVariant,
+                                                WithDescription,
+                                                ContainedWishList
+                                          )
+
+card_simple = Simple("https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+       "https://images.unsplash.com/photo-1523381140794-a1eef18a37c7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MjQ2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60",
+       "Limited Edition Sports Trainer",
+       "$189.99"
+       )
+
+img_src = "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1450&q=80"
+img_src_hover = "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1450&q=80"
+desc = "Limited Edition Sports Trainer"
+sticker = "$189.99"
+variant_text = "6 Colors"
+
+card_withVariant = WithVariant(img_src, img_src_hover, desc, sticker, variant_text)
+
+# Example usage:
+img_src = "https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+desc = "Small Headphones"
+desc_subtitle = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi nobis, quia soluta quisquam voluptatem nemo."
+price = "$299"
+
+card_withDescription = WithDescription(img_src, desc, desc_subtitle, price)
+
+
+# Example usage:
+img_src = "https://images.unsplash.com/photo-1599481238640-4c1288750d7a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2664&q=80"
+product_name = "Robot Toy"
+product_price = "$14.99"
+
+card_containedWishList = ContainedWishList("wished_toy", img_src, product_name, product_price)
+
+
+content = LMap | [card_simple,
+           card_withVariant,
+           card_withDescription,
+           card_containedWishList
+           ] | kv.PD.Halign | ToList
+
+ecomproductcards_box = kv.HS.StackV(key="EcomProductCards",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================
+
+# ======================== product collection ========================
+from hyperui_plugin.ecom.product_collection import  (Simple,
+                                                )
+
+simple_collection = Simple("Product Collection", "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Itaque praesentium cumque iure dicta incidunt est ipsam, officia dolor fugit natus?")
+
+# Example usage:
+img_src = "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+product_name = "Basic Tee"
+
+regular_price = "\u00a324.00 GBP"
+simple_collection.add_product(img_src, product_name, regular_price)
+simple_collection.add_product(img_src, product_name, regular_price)
+simple_collection.add_product(img_src, product_name, regular_price)
+simple_collection.add_product(img_src, product_name, regular_price)
+
+content = [simple_collection]
+ecomproductcollection_box = kv.HS.StackV(key="EcomProductCollection",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+
+# ================================ end ===============================
+
+# ========================== quantity_input ==========================
+from hyperui_plugin.ecom.quantity_input import  (Simple,
+                                                 Contained
+                                                )
+
+simple_qinp = Simple("simple")
+contained_quinp = Contained("contained")
+content = LMap | [simple_qinp,
+           contained_quinp
+           ]| kv.PD.Halign | ToList
+ecomquantinp_box = kv.HS.StackV(key="EcomQuantInp",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================
+# =========================== announcements ==========================
+from hyperui_plugin.marketing.announcements import  (WithAction,
+                                                     BottomWithClose,
+                                                     #SwiperSlider
+                                                     
+                                                     )
+with_action = WithAction()
+bottom_close = BottomWithClose()
+content = LMap | [with_action,
+                  bottom_close,
+                  ] | kv.PD.Halign | ToList
+
+marketingannouncements_box = kv.HS.StackV(key="MarketingAnnouncements",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================
+
+# ============================== banners =============================
+from hyperui_plugin.marketing.banners import  (CenteredWithAction,
+                                               CenteredWithActionGradient
+                                                )
+
+
+title = "Understand User Flow."
+sub_title = "Increase Conversion."
+description = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt illo tenetur fuga ducimus numquam ea!"
+button1_text = "Get Started"
+button1_link = "/get-started"
+button2_text = "Learn More"
+button2_link = "/about"
+
+banner_centeredWithAction = CenteredWithAction(title, sub_title, description, button1_text, button1_link, button2_text, button2_link)
+
+# Example usage:
+title = "Understand User Flow."
+sub_title = "Increase Conversion."
+description = "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nesciunt illo tenetur fuga ducimus numquam ea!"
+button1_text = "Get Started"
+button1_link = "/get-started"
+button2_text = "Learn More"
+button2_link = "/about"
+
+banner_2 = CenteredWithActionGradient(title, sub_title, description, button1_text, button1_link, button2_text, button2_link)
+content = LMap | [banner_centeredWithAction, banner_2] | kv.PD.Halign | ToList
+marketingbanner_box = kv.HS.StackV(key="MarketingBanner",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================
+# ============================ blog cards ============================
+from hyperui_plugin.marketing.blog_cards import  (Simple,
+                                                  Floating,
+                                                  Bordered,
+                                                  GradientBorder
+                                                  )
+
+# Example usage:
+blog_card_simple = Simple(
+    image_url="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+    date="2022-10-10",
+    title="How to position your furniture for positivity",
+    content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus pariatur animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis quidem, mollitia itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius atque dignissimos. Molestias explicabo corporis voluptatem?",
+    link="#",
+)
+
+# Example usage:
+blog_card_floating = Floating(
+    image_url="https://images.unsplash.com/photo-1631451095765-2c91616fc9e6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+    alt_text="Lava",
+    title="Finding the Journey to Mordor",
+    content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus pariatur animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis quidem, mollitia itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius atque dignissimos. Molestias explicabo corporis voluptatem?",
+    link="#",
+)
+
+blog_card_bordered = Bordered(
+    image_url="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80",
+    alt_text="Office",
+    title="Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+    content="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Recusandae dolores, possimus pariatur animi temporibus nesciunt praesentium dolore sed nulla ipsum eveniet corporis quidem, mollitia itaque minus soluta, voluptates neque explicabo tempora nisi culpa eius atque dignissimos. Molestias explicabo corporis voluptatem?",
+    link="#",
+)
+
+blog_card_gradientBorder = GradientBorder(
+    date="2022-10-10",
+    title="How to center an element using JavaScript and jQuery",
+    tags=["Snippet", "JavaScript"]
+)
+content = LMap | [blog_card_simple, 
+                  blog_card_floating,
+                  blog_card_bordered,
+                  blog_card_gradientBorder ] | kv.PD.Halign | ToList
+
+marketingblogcards_box = kv.HS.StackV(key="MarketingBlogCards",
+                                      childs=content,
+                                      twsty_tags=[space/y/8]
+                                      )
+
+
+# ================================ end ===============================
+# ============================== buttons =============================
+from hyperui_plugin.marketing.buttons import  (Simple_Solid,
+                                               Simple_Blank,
+                                               GradientBorder,
+                                               GradientBorder_Oval,
+                                               CurtainClose
+                                                )
+
+ss_btn = Simple_Solid("ss", "Download")
+sb_btn = Simple_Blank("sb", "Download")
+
+gb_btn = GradientBorder("gb", "Download")
+gbo_btn = GradientBorder_Oval("gbo", "Download")
+
+cc_l = CurtainClose("ccl", "Download")
+cc_r = CurtainClose("ccl", "Download", "right")
+cc_b = CurtainClose("ccl", "Download", "bottom")
+cc_t = CurtainClose("ccl", "Download", "top")
+
+content = LMap | [ss_btn,
+           sb_btn,
+           gb_btn,
+           gbo_btn,
+           cc_l,
+           cc_r,
+           cc_b,
+           cc_t,
+           ] | kv.PD.Halign | ToList
+buttons_box = kv.HS.StackV(key="Buttons",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================
+# ========================== marketing cards =========================
+from hyperui_plugin.marketing.cards import  (Card_Type_1,
+                                                )
+
+href = "#"
+title = "Building a SaaS product as a software developer"
+author = "John Doe"
+image_src = "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+content = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit illum provident a, ipsa maiores deleniti consectetur nobis et eaque."
+published_date = "31st June, 2021"
+reading_time = "3 minutes"
+
+# Generate blog card
+card_1 = Card_Type_1(href, title, author, image_src, content, published_date, reading_time)
+content = [card_1]
+marketingcard_box = kv.HS.StackV(key="MarketingCards",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+
+
+# ================================ end ===============================
+# ================================ cta ===============================
+from hyperui_plugin.marketing.cta import  (ContentAndImage,
+                                           NewsletterSignup
+                                                )
+
+cta_1 = ContentAndImage()
+cta_2 = NewsletterSignup()
+
+content = LMap | [cta_1, cta_2]| kv.PD.Halign | ToList
+marketingcta_box = kv.HS.StackV(key="MarketingCTA",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================
+
+# =============================== faqs ===============================
+
+from hyperui_plugin.marketing.faqs import  (BackgroundAccentBorder
+                                                )
+
+faq_1 = BackgroundAccentBorder()
+faq_1.add_faq_item("Lorem ipsum dolor sit amet consectetur adipisicing?",
+                  "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab hic veritatis molestias culpa in, recusandae laboriosam neque aliquid libero nesciunt voluptate dicta quo officiis explicabo consequuntur distinctio corporis earum similique! "
+                  )
+
+content = [faq_1]
+marketingfaq_box = kv.HS.StackV(key="MarketingFAQ",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================
+# ============================== footers =============================
+from hyperui_plugin.marketing.footers import  (CenteredWithBranding
+                                          )
+footer_1 = CenteredWithBranding()
+content= [footer_1]
+marketingfooter_box = kv.HS.StackV(key="MarketingFooter",
+                                   childs=content,
+                                   twsty_tags=[space/y/8]
+                                   )
+# ================================ end ===============================
+from hyperui_plugin.marketing.forms import  (Login,
+                                          )
+
+form_1 = Login()
+
+content= [footer_1]
+marketingform_box = kv.HS.StackV(key="MarketingForm",
+                                        childs=content,
+                                        twsty_tags=[space/y/8]
+                                        )
+# ================================ end ===============================
+# ============================== headers =============================
+from hyperui_plugin.marketing.headers import  (LeftAligned
+                                          )
+
+header_1 = LeftAligned()
+content = [header_1]
+marketingheader_box = kv.HS.StackV(key="MarketingHeader",
+                                        childs=content,
+                                        twsty_tags=[space/y/8]
+                                        )
+# ================================ end ===============================
+# =============================== popus ==============================
+from hyperui_plugin.marketing.popups import  (SplitWithImageAndAction,
+                                              MessageNotificationsAndAction,
+                                              OrderNotificationsWithAction,
+                                              ContactActions,
+                                              NotificationWithImageAndClose,
+                                              FloatingSplitWithImageContentClose,
+                                              FloatingWithClose
+                                                )
+
+
+# Example invocation
+img_src_example = "https://images.unsplash.com/photo-1611510338559-2f463335092c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
+text_example = "On your next order over $50"
+
+popup_type_1 = SplitWithImageAndAction(img_src_example, "Run with the pack", "Get 20% off", "On your next order over $50", "GET DISCOUNT", "Offer valid until 24th March, 2021 *" )
+    
+
+
+popup_type_2 = MessageNotificationsAndAction("New message!",
+                              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam ea quo unde vel adipisci blanditiis voluptates eum. Nam, cum minima?",
+                              "Take a Look",
+                              "Mark as Read",
+                              )
+popup_type_3 =  OrderNotificationsWithAction()
+popup_type_4 = NotificationWithImageAndClose("akey")
+
+popup_type_5 = ContactActions()
+
+popup_type_6 = FloatingSplitWithImageContentClose("btnkey")
+popup_type_7 = FloatingWithClose("btnkey")
+
+content = LMap | [popup_type_1,
+           popup_type_2,
+           popup_type_3,
+           popup_type_4,
+           popup_type_5,
+           popup_type_6,
+           popup_type_7
+           ] | kv.PD.Halign | ToList 
+
+
+marketingpopus_box = kv.HS.StackV(key="MarketingPopup",
+                                        childs=content,
+                                        twsty_tags=[space/y/8]
+                                        )
+
+# ================================ end ===============================
+# ============================= pricings =============================
+from hyperui_plugin.marketing.pricings import  (HighlightOption,
+                                              )
+highlightOption = HighlightOption()
+content = [highlightOption]
+marketingpricings_box = kv.HS.StackV(key="MarketingPricings",
+                                        childs=content,
+                                        twsty_tags=[space/y/8]
+                                        )
+# ================================ end ===============================
+# ============================== section =============================
+from hyperui_plugin.marketing.sections import  (GridUSP
+                                              )
+gridusp = GridUSP()
+content = [gridusp]
+
+marketingsections_box = kv.HS.StackV(key="MarketingSections",
+                                        childs=content,
+                                        twsty_tags=[space/y/8]
+                                        )
+
+# ================================ end ===============================
+# =========================== testimonials ===========================
+from hyperui_plugin.marketing.testimonials import  (SplitContentSlider,
+                                              )
+testimonial_1 = SplitContentSlider()
+
+content = [testimonial_1]
+marketingtestimonial_box = kv.HS.StackV(key="MarketingTestimonal",
+                                        childs=content,
+                                        twsty_tags=[space/y/8]
+                                        )
+

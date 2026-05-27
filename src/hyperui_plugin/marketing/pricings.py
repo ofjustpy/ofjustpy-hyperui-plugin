@@ -1,6 +1,5 @@
-
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -18,11 +17,11 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 
 def HighlightOption():
-    with writer_ctx:
+    with MuCtx:
         with Div(classes="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8") as comp_box:
             with Div(classes="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8"):
                 with Div(classes="rounded-2xl border border-indigo-600 p-6 shadow-sm ring-1 ring-indigo-600 sm:order-last sm:px-8 lg:p-12"):

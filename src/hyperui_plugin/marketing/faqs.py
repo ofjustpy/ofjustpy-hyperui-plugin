@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,15 +17,15 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 def BackgroundAccentBorder():
-    with writer_ctx:
+    with MuCtx:
         with Div(classes="space-y-4") as comp_box:
             pass
         
     def add_faq_item(question, answer, comp_box=comp_box):
-        with writer_ctx:
+        with MuCtx:
             with Details(classes="group", extra_classes="[&_summary::-webkit-details-marker]:hidden") as faq_box:
                 with Summary(classes="flex cursor-pointer items-center justify-between gap-1.5 rounded-lg bg-gray-50 p-4 text-gray-900"):
                     with H2(classes="font-medium", text=question):

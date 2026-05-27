@@ -1,5 +1,6 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
+
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,11 +18,11 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 # Quantity input section
 def Simple(key):
-    with writer_ctx:
+    with MuCtx:
         
         with Div(classes="max-w-md") as comp_box:
             with Label(for_='Quantity', classes='sr-only'):
@@ -42,7 +43,7 @@ def Simple(key):
 # TODO: figure out how not to strecth the div containing 
 # have fixed width with max-w-md
 def Contained(key):
-    with writer_ctx:
+    with MuCtx:
         with Div(classes="max-w-md") as comp_box:
             with Label(for_='Quantity', classes='sr-only'):
                 pass

@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,7 +17,7 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 
 # def Large_Newsletter():
@@ -96,7 +96,7 @@ from html_writer.macro_module import macros, writer_ctx
 #     return comp_box
 
 def CenteredWithBranding():
-    with writer_ctx:
+    with MuCtx:
         with Footer(classes='bg-gray-100') as comp_box:
             with Div(classes='mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8'):
                 with Div(classes='flex justify-center text-teal-600'):

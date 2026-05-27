@@ -1,5 +1,6 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
+
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,10 +18,10 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 def WithAction():
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='bg-indigo-600 px-4 py-3 text-white sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8') as comp_box:
             with Prose(classes='text-center font-medium sm:text-left', text="Love Alpine JS?"):
                 
@@ -35,7 +36,7 @@ def WithAction():
 
 
 def BottomWithClose():
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='fixed inset-x-0 bottom-0 p-4') as comp_box:
             with Div(classes='relative flex items-center justify-between gap-4 rounded-lg bg-indigo-600 px-4 py-3 text-white shadow-lg'):
                 with Prose(classes='text-sm font-medium', text="Love Alpine JS?"):
@@ -53,7 +54,7 @@ def BottomWithClose():
 
 # TODO: incomplete; incorporate swiper js module
 # def SwiperSlider():
-#     with writer_ctx:
+#     with MuCtx:
 #         with Div(classes='bg-gray-100 px-4 py-3') as comp_box:
 #             with Div(classes='mx-auto flex max-w-3xl items-center justify-center'):
 #                 with Button(key="abtn", classes='swiper-prev-button hidden hover:text-gray-500 sm:block sm:rounded sm:text-gray-700 sm:transition', aria_label='Previous slide'):

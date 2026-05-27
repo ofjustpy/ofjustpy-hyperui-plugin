@@ -1,5 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import (conc_twtags,
                                tstr,
@@ -17,11 +17,10 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
 
 #Note: adding max-w-md to size the images
 def Simple(img_src, img_src_hover, title, sticker):
-    with writer_ctx:
+    with MuCtx:
         with A(href="#", classes="max-w-md group block overflow-hidden") as root_comp:
             with Div(classes="relative h-96 sm:h-96"):
                 with Img(src=img_src, classes="absolute inset-0 h-full w-full object-cover opacity-100 group-hover:opacity-0"):
@@ -38,7 +37,7 @@ def Simple(img_src, img_src_hover, title, sticker):
 
 #Note: adding max-w-md to size the images
 def WithVariant(img_src, img_src_hover, desc, sticker, variant_text):
-    with writer_ctx:
+    with MuCtx:
         with A(href="#", classes="group max-w-md block overflow-hidden") as top_component:
             with Div(classes="relative h-96 sm:h-96"):
                 with Img(src=img_src, classes="absolute inset-0 h-full w-full object-cover opacity-100 group-hover:opacity-0"):
@@ -57,7 +56,7 @@ def WithVariant(img_src, img_src_hover, desc, sticker, variant_text):
     return top_component
 
 def WithDescription(img_src, desc, desc_subtitle, price):
-    with writer_ctx:
+    with MuCtx:
         with A(href="#", classes="group max-w-md block") as comp_box:
             with Img(src=img_src, alt="",
                      classes="w-full object-cover ",
@@ -81,7 +80,7 @@ def WithDescription(img_src, desc, desc_subtitle, price):
     return comp_box
 
 def ContainedWishList(key, img_src, product_name, product_price):
-    with writer_ctx:
+    with MuCtx:
         with A(href="#", classes="max-w-md group relative block overflow-hidden") as comp_box:
             with Button(key=f"{key}_wishbtn", classes="absolute end-4 top-4 z-10 rounded-full bg-white p-1.5 text-gray-900 transition hover:text-gray-900/75"):
                 with Span(classes="sr-only", text="Wishlist"):
