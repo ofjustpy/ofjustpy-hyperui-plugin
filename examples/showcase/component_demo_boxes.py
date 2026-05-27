@@ -1,9 +1,44 @@
-from hyperui_plugin.alerts import (Popup, PopupWithAction, Content, WarningContent)
-import kavya as kv
 
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils import *
 
+# ======================== Expression helpers ========================
+class LMapInitiator:
+    def __or__(self, iterable):
+        # Spawns a temporary runner for this specific operation.
+        # 'LMap' itself stays completely untouched and clean.
+        return LMapRunner(iterable)
+
+class LMapRunner:
+    def __init__(self, iterable):
+        self.iterable = iterable
+
+    def __or__(self, func):
+        if not callable(func):
+            raise TypeError("The final item in the LMap chain must be a callable function.")
+        
+        # 1. Compute the result
+        result = [func(item) for item in self.iterable]
+        
+        # 2. Explicitly break references to the input data to free memory immediately
+        self.iterable = None 
+        
+        # 3. Return the native list
+        return result
+
+# The single global instance
+LMap = LMapInitiator()
+
+
+
+
+
+# ================================ end ===============================
+
+
 # ============================== popups ==============================
+from hyperui_plugin.alerts import (Popup, PopupWithAction, Content, WarningContent)
 alert_popup = Popup("popup_alert", title='Your product changes have been saved.', desc='Changes saved')
 
 alert_popupaction = PopupWithAction("popup_alertaction", title='Your product changes have been saved.', desc='Changes saved')
@@ -477,7 +512,9 @@ tabbed.add_tab("messages", "Messages")
 tabbed.add_tab("archive", "Archive")
 tabbed.add_tab("notifications", "Notifications", selected=True)
 
-content=[pills, tabbed]
+content=[kv.PD.Halign(pills),
+         kv.PD.Halign(tabbed)
+         ]
 # Tabs are mutable -- eventullay
 tabs_box = kv.MD.StackV(key="Tabs",
                         childs=content,
@@ -527,11 +564,17 @@ apple_togglebtn = Apple(key="atbtn")
 material_togglebtn = Material(key="mtbtn")
 #simpleicon_togglebtn = SimpleWithIcon(key="sitbtn")
 
-content = [simple_togglebtn,
-           material_togglebtn,
-           apple_togglebtn,
-           #simpleicon_togglebtn
-           ]
+# content = [kv.PD.Halign(simple_togglebtn),
+#            kv.PD.Halign(material_togglebtn),
+#            kv.PD.Halign(apple_togglebtn),
+#            #simpleicon_togglebtn
+#            ]
+
+content = LMap | [ simple_togglebtn,
+                     material_togglebtn,
+                     apple_togglebtn
+
+                    ] | kv.PD.Halign
 toggles_box = kv.MD.StackV(key="Toggles",
                                       childs=content,
                                       twsty_tags=[space/y/8]
@@ -539,3 +582,140 @@ toggles_box = kv.MD.StackV(key="Toggles",
 
 # ================================ end ===============================
 
+# =========================== vertical menu ==========================
+from hyperui_plugin.verticalmenu import  (Simple,
+                                          WithBadge,
+                                          WithIcon,
+                                          WithIconAndBadge,
+                                          WithIconAndBrandedAccent,
+                                          menugroups,
+                                          SplitWithHeading
+                                          )
+
+container = Simple(twsty_tags=[W/32])
+container.add_item("General")
+container.add_item("Teams")
+container.add_item("Billing")
+
+badge_container = WithBadge(twsty_tags=[W/32])
+badge_container.add_item("General")
+badge_container.add_item("Teams", badge="6")
+badge_container.add_item("Billing")
+badge_container.add_item("Invoices", badge="3")
+
+mg_container = menugroups(twsty_tags=[W/64])
+agroup = mg_container.add_group()
+agroup.add_item("Profile")
+agroup.add_item("Team")
+agroup.add_item("Projects")
+agroup = mg_container.add_group()
+agroup.add_item("Update")
+agroup.add_item("Help")
+agroup.add_item("Settings")
+agroup = mg_container.add_group()
+agroup.add_item("Logout")
+
+splitWithHeading = SplitWithHeading()
+group= splitWithHeading.add_group("General")
+group.add_item("Profile")
+group.add_item("Team")
+group.add_item("Projects")
+group.add_item("Meeting")
+group.add_item("Calender")
+
+group= splitWithHeading.add_group("Support")
+group.add_item("Update")
+group.add_item("Help")
+group.add_item("Settings")
+
+group= splitWithHeading.add_group("Profile")
+group.add_item("Details")
+group.add_item("Subscription")
+group.add_item("Logout")
+
+content = LMap | [ container,
+                   badge_container,
+                   mg_container,
+                   splitWithHeading
+
+                    ] | kv.PD.Halign
+
+
+verticalmenu_box = kv.HS.StackV(key="VerticalMenu",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+
+# ============================ ecom/carts ============================
+from hyperui_plugin.ecom.carts import  (BottomBanner, Popup,
+                                        Contained
+                                          )
+bb_container = BottomBanner()
+bb_container.add_item("view_cart", "View My Cart", href="", styling="outline")
+bb_container.add_item("checkout", "Checkout", href="", styling="solid")
+bb_container.add_item("continueShopping", "Continue Shopping", href="", styling="underline")
+
+popup_cart = Popup(bb_container)
+
+with MuCtx:
+    with Dl(classes="mt-0.5 space-y-px text-xs text-gray-600") as card_body:
+        with Div:
+            with Dt(twsty_tags=[db.i], text="Size:"):
+                pass
+            with Dd(twsty_tags=[db.i], text="XXS"):
+                pass
+
+        with Div:
+            with Dt(twsty_tags=[db.i], text="Color:"):
+                pass
+            with Dd(twsty_tags=[db.i], text="White"):
+                pass
+            
+
+            
+    
+popup_cart.add_item(img_src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80",
+                    desc_title="Basic Tee 6-Pack",
+                    
+                    desc_box=card_body
+                    )
+
+popup_cart.add_item(img_src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80",
+                    desc_title="Basic Tee 6-Pack",
+                    
+                    desc_box=card_body
+                    )
+
+popup_cart.add_item(img_src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80",
+                    desc_title="Basic Tee 6-Pack",
+                    
+                    desc_box=card_body
+                    )
+
+content = LMap | [ popup_cart,
+                   Contained()
+
+                    ] | kv.PD.Halign
+
+ecomcarts_box = kv.HS.StackV(key="EcomCarts",
+                             childs=content,
+                             twsty_tags=[space/y/8]
+                             )
+# ================================ end ===============================
+
+# ======================== collection filters ========================
+from hyperui_plugin.ecom.collection_filters import  (InlineDropdown,
+                                                     StackedDropdown
+                                                     )
+
+cf_1 = InlineDropdown()
+cf_2 = StackedDropdown()
+content = LMap | [ cf_1, 
+                   cf_2
+
+                    ] | kv.PD.Halign 
+ecomcollectionfilters_box = kv.HS.StackV(key="EcomCollectionFilters",
+                                 childs=content,
+                                 twsty_tags=[space/y/8]
+                                 )
+# ================================ end ===============================

@@ -1,7 +1,6 @@
-import ofjustpy as oj
-from ofjustpy import icons
-from ofjustpy.icons import FontAwesomeIcon
-from py_tailwind_utils.to_twsty_expr import encode_twstr
+import kavya as kv
+from kavya.dsl import macros, MuCtx
+from py_tailwind_utils import *
 from py_tailwind_utils import (conc_twtags,
                                tstr,
                                pd,
@@ -18,10 +17,10 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 def BottomBanner():
-    container = oj.PC.Div(twsty_tags=[space/y/4, ta.center], childs = [])
+    container = kv.PD.Div(twsty_tags=[space/y/4, ta.center], childs = [])
     def add_item(key, text, href="", styling="outline", container=container):
         """
         styling: outline, solid, underline
@@ -36,7 +35,7 @@ def BottomBanner():
             twsty_tags = encode_twstr("inline-block text-sm text-gray-500 underline underline-offset-4 transition hover:text-gray-600")
             
             
-        rowitem = oj.AC.A(key=key, text=text, href=href, twsty_tags=twsty_tags)
+        rowitem = kv.AC.A(key=key, text=text, href=href, twsty_tags=twsty_tags)
         container.components.append(rowitem)
     container.add_item = add_item
     return container
@@ -46,34 +45,35 @@ def BottomBanner():
     
 def Popup(bottom_banner):
 
-    all_items = oj.PC.Ul(twsty_tags=[space/y/4], childs=[])
+    all_items = kv.PD.Ul(twsty_tags=[space/y/4], childs=[])
     def add_item(img_src, desc_title, desc_box, alt="", all_items=all_items):
 
-        img = oj.PC.Img(src=img_src, alt=alt, twsty_tags=encode_twstr("h-16 w-16 rounded object-cover")
+        img = kv.PC.Img(src=img_src, alt=alt, twsty_tags=encode_twstr("h-16 w-16 rounded object-cover")
                         )
 
 
-        desc_box = oj.PC.Div(childs = [oj.PC.H3(text=desc_title,
+        desc_box = kv.PD.Div(childs = [kv.PC.H3(text=desc_title,
                                      twsty_tags=encode_twstr("text-sm text-gray-900")
                                      ),
                             desc_box
 
                             ]
                   )
-        item_box = oj.PD.Li(twsty_tags=encode_twstr("flex items-center gap-4"), childs = [img, desc_box])
+        item_box =kv.PD.Li(twsty_tags=encode_twstr("flex items-center gap-4"), childs = [img, desc_box])
         all_items.components.append(item_box)
 
 
-    all_items_root = oj.PC.Div(twsty_tags=[mr/st/4, space/y/6], childs = [all_items, bottom_banner])
+    all_items_root = kv.PD.Div(twsty_tags=[mr/st/4, space/y/6], childs = [all_items, bottom_banner])
 
-    close_button = oj.AD.Button(key="close_{key}",
-                         childs = [oj.PC.Span(twsty_tags=[srs.only], text="Close cart"), FontAwesomeIcon(label="faCross",
-                                                                                                         classes="w-5 h-5",)
+    close_button = kv.AD.Button(key="close_{key}",
+                         childs = [kv.PC.Span(twsty_tags=[srs.only], text="Close cart"),
+                                   kv.PC.FontAwesomeIcon(label="faCross",
+                                                         classes="w-5 h-5",)
                                    ],
                          twsty_tags=encode_twstr("absolute end-4 top-4 text-gray-600 transition hover:scale-110")
                          )
                                    
-    root = oj.PC.Div(twsty_tags=encode_twstr("relative w-screen max-w-sm border border-gray-600 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8"),
+    root = kv.PC.Div(twsty_tags=encode_twstr("relative w-screen max-w-sm border border-gray-600 bg-gray-100 px-4 py-8 sm:px-6 lg:px-8"),
                      childs = [close_button, all_items_root]
                      )
     root.add_item = add_item
@@ -125,7 +125,7 @@ def Popup(bottom_banner):
 
 def Contained():
 
-    with writer_ctx:
+    with MuCtx:
         with Section() as comp_box:
             with Div(classes='mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8'):
                 with Div(classes='mx-auto max-w-3xl'):

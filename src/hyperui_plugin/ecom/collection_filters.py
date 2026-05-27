@@ -1,7 +1,5 @@
-import ofjustpy as oj
-from ofjustpy import icons
-from ofjustpy.icons import FontAwesomeIcon
-from py_tailwind_utils.to_twsty_expr import encode_twstr
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils import (conc_twtags,
                                tstr,
                                pd,
@@ -18,12 +16,12 @@ from py_tailwind_utils import (conc_twtags,
                                srs,
                                ta)
 
-from html_writer.macro_module import macros, writer_ctx
+ 
 
 
 def InlineDropdown():
 
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='flex gap-8') as comp_box:
             # Availability
             with Div(classes='relative'):
@@ -113,10 +111,10 @@ def InlineDropdown():
 
     return comp_box
 
-from html_writer.macro_module import macros, writer_ctx
+
 def StackedDropdown():
 
-    with writer_ctx:
+    with MuCtx:
         with Div(classes='space-y-2') as comp_box:
             # Availability
             with Details(classes='overflow-hidden rounded border border-gray-300',

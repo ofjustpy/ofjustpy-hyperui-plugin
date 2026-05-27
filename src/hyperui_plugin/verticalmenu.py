@@ -1,11 +1,11 @@
-import ofjustpy as oj
-from ofjustpy import icons
+import kavya as kv
+from kavya.dsl import macros, MuCtx
 from py_tailwind_utils.to_twsty_expr import encode_twstr
 from py_tailwind_utils import conc_twtags, tstr, pd, grow, bg, green, W, fc, gray, space, y
 
 def Simple(twsty_tags=[], **kwargs):
     twsty_tags = conc_twtags(space/y/1, *twsty_tags)
-    container = oj.PD.Ul(childs=[], twsty_tags=twsty_tags)
+    container = kv.PD.Ul(childs=[], twsty_tags=twsty_tags)
     bg_color = "bg-gray-100"
     text_color= "text-gray-700"
     def add_item(text, href="#", twsty_tags=[], **kwargs):
@@ -14,7 +14,7 @@ def Simple(twsty_tags=[], **kwargs):
         twsty_tags = conc_twtags(*encode_twstr(f"block rounded-lg {bg_color} px-4 py-2 text-sm font-medium {text_color}"), *twsty_tags)
         bg_color = "hover:bg-gray-100 hover:text-gray-700"
         text_color = "text-gray-500"
-        container.components.append(oj.PD.Li(childs=[oj.PC.A(text=text,
+        container.components.append(kv.PD.Li(childs=[kv.PC.A(text=text,
                                                              href=href,
                                                              twsty_tags=twsty_tags,
                                                              
@@ -28,7 +28,7 @@ def Simple(twsty_tags=[], **kwargs):
 
 def WithBadge(twsty_tags=[], **kwargs):
     twsty_tags = conc_twtags(space/y/1, *twsty_tags)
-    container = oj.PD.Ul(childs=[], twsty_tags=twsty_tags)
+    container = kv.PD.Ul(childs=[], twsty_tags=twsty_tags)
     bg_color = "bg-gray-100"
     text_color= "text-gray-700"
     def add_item(text, href="#",
@@ -41,12 +41,12 @@ def WithBadge(twsty_tags=[], **kwargs):
         
         bg_color = "hover:bg-gray-100 hover:text-gray-700"
         text_color = "text-gray-500"
-        childs = [oj.PC.Span(text=text, twsty_tags=encode_twstr("text-sm font-medium"))]
+        childs = [kv.PC.Span(text=text, twsty_tags=encode_twstr("text-sm font-medium"))]
         if badge:
-            childs.append(oj.PC.Span(twsty_tags=encode_twstr("shrink-0 rounded-full bg-gray-100 px-3 py-0.5 text-xs text-gray-600 group-hover:bg-gray-200 group-hover:text-gray-700"), text=badge)
+            childs.append(kv.PC.Span(twsty_tags=encode_twstr("shrink-0 rounded-full bg-gray-100 px-3 py-0.5 text-xs text-gray-600 group-hover:bg-gray-200 group-hover:text-gray-700"), text=badge)
                           )
             
-        container.components.append(oj.PD.Li(childs=[oj.PD.A(href=href,
+        container.components.append(kv.PD.Li(childs=[kv.PD.A(href=href,
                                                              classes="group flex items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700",
                                                              childs = childs
                                                              
@@ -60,7 +60,7 @@ def WithBadge(twsty_tags=[], **kwargs):
 
 def WithIcon(twsty_tags=[], **kwargs):
     twsty_tags = conc_twtags(space/y/1, *twsty_tags)
-    container = oj.PD.Ul(childs=[], twsty_tags=twsty_tags)
+    container = kv.PD.Ul(childs=[], twsty_tags=twsty_tags)
     bg_color = "bg-gray-100"
     text_color= "text-gray-700"
     def add_item(text, icon, href="#",  twsty_tags=[], **kwargs):
@@ -71,11 +71,11 @@ def WithIcon(twsty_tags=[], **kwargs):
         
         bg_color = "hover:bg-gray-100 hover:text-gray-700"
         text_color = "text-gray-500"
-        container.components.append(oj.PD.Li(childs=[oj.PD.A(href=href,
+        container.components.append(kv.PD.Li(childs=[kv.PD.A(href=href,
                                                              #twsty_tags=twsty_tags,
                                                              classes="flex items-center gap-2 rounded-lg bg-gray-100 px-4 py-2 text-gray-700",
                                                              childs = [icon,
-                                                                       oj.PC.Span(text=text, twsty_tags=encode_twstr("text-sm font-medium"))
+                                                                       kv.PC.Span(text=text, twsty_tags=encode_twstr("text-sm font-medium"))
                                                                        ]
                                                              
                                                              )
@@ -88,7 +88,7 @@ def WithIcon(twsty_tags=[], **kwargs):
 
 def WithIconAndBadge(twsty_tags=[], **kwargs):
     twsty_tags = conc_twtags(space/y/1, *twsty_tags)
-    container = oj.PD.Ul(childs=[], twsty_tags=twsty_tags)
+    container = kv.PD.Ul(childs=[], twsty_tags=twsty_tags)
     bg_color = "bg-gray-100"
     text_color= "text-gray-700"
     def add_item(text, icon, href="#", badge=None, twsty_tags=[], **kwargs):
@@ -103,14 +103,14 @@ def WithIconAndBadge(twsty_tags=[], **kwargs):
         bg_color = "hover:bg-gray-100 hover:text-gray-700"
         text_color = "text-gray-500"
 
-        childs = [        oj.PC.Div(twsty_tags=encode_twstr("flex items-center gap-2"), childs=[icon, oj.PC.Span(text=text, twsty_tags=encode_twstr("text-sm font-medium"))])]
+        childs = [        kv.PC.Div(twsty_tags=encode_twstr("flex items-center gap-2"), childs=[icon, kv.PC.Span(text=text, twsty_tags=encode_twstr("text-sm font-medium"))])]
         
         if badge:
-            childs.append(oj.PC.Span(twsty_tags=encode_twstr("shrink-0 rounded-full bg-gray-100 px-3 py-0.5 text-xs text-gray-600 group-hover:bg-gray-200 group-hover:text-gray-700"), text=badge)
+            childs.append(kv.PC.Span(twsty_tags=encode_twstr("shrink-0 rounded-full bg-gray-100 px-3 py-0.5 text-xs text-gray-600 group-hover:bg-gray-200 group-hover:text-gray-700"), text=badge)
                           )
 
         
-        container.components.append(oj.PD.Li(childs=[oj.PD.A(href=href,
+        container.components.append(kv.PD.Li(childs=[kv.PD.A(href=href,
                                                              #twsty_tags=twsty_tags,
                                                              classes=classes,
                                                              childs = childs
@@ -124,7 +124,7 @@ def WithIconAndBadge(twsty_tags=[], **kwargs):
 
 def WithIconAndBrandedAccent(twsty_tags=[], **kwargs):
     twsty_tags = conc_twtags(space/y/1, *twsty_tags)
-    container = oj.PD.Ul(childs=[], twsty_tags=twsty_tags)
+    container = kv.PD.Ul(childs=[], twsty_tags=twsty_tags)
     bg_color = "bg-blue-50"
     text_color= "text-blue-700"
     border_seen = "border-blue-500"
@@ -139,11 +139,11 @@ def WithIconAndBrandedAccent(twsty_tags=[], **kwargs):
         bg_color = "hover:bg-gray-50 hover:text-gray-700"
         text_color = "text-gray-500"
         border_seen = "border-transparent hover:border-gray-100"
-        container.components.append(oj.PD.Li(childs=[oj.PD.A(href=href,
+        container.components.append(kv.PD.Li(childs=[kv.PD.A(href=href,
                                                              #twsty_tags=twsty_tags,
                                                              classes=classes,
                                                              childs = [icon,
-                                                                       oj.PC.Span(text=text, twsty_tags=encode_twstr("text-sm font-medium"))
+                                                                       kv.PC.Span(text=text, twsty_tags=encode_twstr("text-sm font-medium"))
                                                                        ]
                                                              
                                                              )
@@ -154,19 +154,19 @@ def WithIconAndBrandedAccent(twsty_tags=[], **kwargs):
     return container
 
 def menugroups(twsty_tags=[]):
-    tlb = oj.PD.Ul(twsty_tags=encode_twstr("-my-2 divide-y divide-gray-100"))
+    tlb = kv.PD.Ul(twsty_tags=encode_twstr("-my-2 divide-y divide-gray-100"))
     def add_group():
-        group_box = oj.PC.Ul(twsty_tags=[space/y/1])
+        group_box = kv.PD.Ul(twsty_tags=[space/y/1])
         
         def add_item(text, href="", group_box=group_box):
-            group_box.components.append(oj.PD.Li(childs = [oj.PC.A(href=href, twsty_tags=encode_twstr("block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"), text=text)]))
+            group_box.components.append(kv.PD.Li(childs = [kv.PC.A(href=href, twsty_tags=encode_twstr("block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"), text=text)]))
             
             
             pass
         group_box.add_item = add_item
         tlb.components.append(group_box)
         return group_box
-    root = oj.PC.Div(twsty_tags=conc_twtags(*encode_twstr("flow-root"), *twsty_tags),
+    root = kv.PD.Div(twsty_tags=conc_twtags(*encode_twstr("flow-root"), *twsty_tags),
                      childs=[tlb]
                      )
     root.add_group = add_group
@@ -255,26 +255,26 @@ def menugroups(twsty_tags=[]):
 #                                 pass
 
 
-from html_writer.macro_module import macros, writer_ctx
+
 
 def SplitWithHeading():
     
-    with writer_ctx:
+    with MuCtx:
         with Div() as comp_box:
-            with Ul(classes='flex flex-col space-y-2') as group_box:
+            with PD.Ul(classes='flex flex-col space-y-2') as group_box:
                 pass
 
     def add_group(group_title, group_box=group_box):
-        with writer_ctx:
+        with MuCtx:
             with Li() as group_item_box:
                 with Strong(classes='block text-xs font-medium uppercase text-gray-400', text=group_title):
                     pass
 
-                with Ul(classes='mt-2 space-y-1') as ul_box:
+                with PD.Ul(classes='mt-2 space-y-1') as ul_box:
                     pass
 
         def add_item(title, ul_box=ul_box):
-            with writer_ctx:
+            with MuCtx:
                 with Li() as li_box:
                     with A(href='', classes='block rounded-lg  px-4 py-2 text-sm font-medium text-gray-700 text-gray-500 hover:bg-gray-100 hover:text-gray-700', text=title):
                         pass
@@ -291,10 +291,10 @@ def SplitWithHeading():
 
 
 def BaseWithHighlightedActiveLink():
-    comp_box = oj.PD.Ul()
+    comp_box = kv.PD.Ul()
 
     def add_item():
-        oj.PD.Li(childs= [oj.Mutable.Button(classes="flex items-center gap-2 border-s-[3px] border-blue-500 bg-blue-50 px-4 py-3 text-blue-700", childs = [oj.PD.Span(classes="text-sm font-medium", text=text)
+        kv.PD.Li(childs= [kv.MC.Button(classes="flex items-center gap-2 border-s-[3px] border-blue-500 bg-blue-50 px-4 py-3 text-blue-700", childs = [kv.PD.Span(classes="text-sm font-medium", text=text)
 
             ]
 
